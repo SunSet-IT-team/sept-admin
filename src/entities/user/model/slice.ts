@@ -1,22 +1,26 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {User} from './types';
 
 /**
  * Слайс для хранения данных текущего пользователя
  */
 
 interface UserSlice {
-    user: string | null;
+    user: User | null;
 }
 
 const initialState: UserSlice = {
-    user: null,
+    user: {
+        login: 'admin',
+        email: 'info@mail.ru',
+    },
 };
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser(state, action: PayloadAction<string | null>) {
+        setUser(state, action: PayloadAction<User | null>) {
             state.user = action.payload;
         },
         clearUser(state) {
