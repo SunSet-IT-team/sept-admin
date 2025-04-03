@@ -1,11 +1,22 @@
 import {createTheme} from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+    interface TypeText {
+        black: string;
+        white: string;
+    }
+}
+
 export const appTheme = createTheme({
     palette: {
         primary: {
-            main: '#1976d2', // Синий (как у Material UI по умолчанию)
+            main: '#4D4D4D',
             dark: '#1565c0',
             light: '#42a5f5',
+        },
+        text: {
+            black: '#000000',
+            white: '#FFFFFF',
         },
         secondary: {
             main: '#9c27b0', // Фиолетовый
@@ -24,22 +35,31 @@ export const appTheme = createTheme({
             fontSize: '2.5rem',
             fontWeight: 500,
         },
+        subtitle1: {
+            fontSize: 24,
+            fontWeight: 500,
+        },
+        subtitle2: {
+            fontSize: 20,
+            fontWeight: 500,
+        },
         button: {
-            textTransform: 'none', // Убираем автоматический CAPS у кнопок
+            textTransform: 'none',
+            fontSize: 15,
         },
     },
     components: {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: '8px', // Закруглённые кнопки
+                    borderRadius: '8px',
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)', // Лёгкая тень
+                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
                 },
             },
         },

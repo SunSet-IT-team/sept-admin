@@ -1,4 +1,8 @@
+import {Container} from '@mui/material';
 import {Outlet} from 'react-router-dom';
+import {ContainerStyles} from './styles';
+import {Header} from '../../widgets/Header';
+import Navigation from '../../widgets/Navigation';
 
 /**
  * Базовый шаблон для страниц в админке
@@ -6,12 +10,13 @@ import {Outlet} from 'react-router-dom';
 export const Layout = () => {
     return (
         <div className="app">
-            {/* <Header /> */}
-            <div className="app-content">
+            <Header />
+            <Navigation />
+            <Container maxWidth="lg" sx={ContainerStyles}>
                 <main className="main">
                     <Outlet />
                 </main>
-            </div>
+            </Container>
         </div>
     );
 };

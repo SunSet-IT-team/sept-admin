@@ -1,8 +1,10 @@
+import {Typography} from '@mui/material';
+
 /**
  * Страница услуг
  */
 const ServicesPage = () => {
-    return <p>Страница услуг</p>;
+    return <Typography variant="h1">Услуги</Typography>;
 };
 
 export default ServicesPage;

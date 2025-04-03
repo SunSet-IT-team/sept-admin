@@ -5,6 +5,7 @@ import {AppRouter} from './routes/AppRoute';
 import {ThemeProvider} from '@mui/material/styles';
 import {appTheme} from './theme';
 import {BrowserRouter} from 'react-router-dom';
+import Static from './static/Static';
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <ThemeProvider theme={appTheme}>
                 <BrowserRouter>
                     <Provider store={store}>
+                        <Static />
                         <AppRouter />
                     </Provider>
                 </BrowserRouter>
