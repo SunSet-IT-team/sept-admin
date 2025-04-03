@@ -1,0 +1,18 @@
+# Игнорируем зависимости и артефакты
+node_modules/
+dist/
+build/
+.env
+.env.local
+
+# Игнорируем системные файлы
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Игнорируем файлы для разработки
+docker-compose.yml
+.dockerignore
+.git/
+.gitignore
