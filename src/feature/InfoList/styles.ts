@@ -1,10 +1,8 @@
-import {SxProps, Theme, useTheme} from '@mui/material/styles';
+import {SxProps, Theme} from '@mui/material/styles';
 
 type StylesDictionary = Record<string, SxProps<Theme>>;
 
 export const useStyles = (): StylesDictionary => {
-    const theme = useTheme();
-
     return {
         listStyles: {
             display: 'flex',
