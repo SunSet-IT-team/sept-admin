@@ -76,7 +76,6 @@ const ServicesPage = () => {
                 disableColumnSelector
                 disableColumnFilter
                 disableDensitySelector
-                disableColumnResize
                 disableMultipleRowSelection
                 checkboxSelection={false} // Отключаем выбор строк
             />
