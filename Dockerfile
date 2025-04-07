@@ -1,8 +1,5 @@
 # Этап сборки
-FROM node:18-alpine as build
-
-# Устанавливаем Yarn глобально
-RUN npm install -g yarn
+FROM node:20-alpine as build
 
 WORKDIR /app
 COPY package.json yarn.lock ./
