@@ -16,7 +16,7 @@ export type FetchedServices = {
         page?: number;
         perPage?: number;
     };
-    sort?: Sort;
+    sort?: Sort | null;
 };
 
 /**
@@ -56,7 +56,6 @@ export const fetchServices = createAsyncThunk<
 
         // Добавляем сортировку
         if (data.sort) res.sort = data.sort;
-        if (data.sort == null) res.sort = undefined;
 
         return res;
     } catch (error: any) {

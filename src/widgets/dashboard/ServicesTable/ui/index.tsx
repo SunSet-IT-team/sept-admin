@@ -41,8 +41,6 @@ const ServicesTable = () => {
     };
 
     const handleSortModelChange = (model: GridSortModel) => {
-        // Если не выбрана сортировка
-
         const sort: Sort | null = model[0]
             ? {...model[0], sort: model[0].sort ?? 'asc'}
             : null;

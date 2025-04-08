@@ -44,12 +44,13 @@ const serviceSlice = createSlice({
         });
         builder.addCase(fetchServices.fulfilled, (state, action) => {
             // Ставим пагинацию
-            if (action.payload.pagination.total)
-                state.pagination.total = action.payload.pagination.total;
-            if (action.payload.pagination.perPage)
-                state.pagination.perPage = action.payload.pagination.perPage;
-            if (action.payload.pagination.page)
-                state.pagination.currentPage = action.payload.pagination.page;
+            state.pagination = {
+                ...state.pagination,
+                ...action.payload.pagination,
+            };
+
+            // Ставим сортировку
+            if (action.payload.sort) state.sort = action.payload.sort;
 
             state.pagination.isLoading = false;
         });
