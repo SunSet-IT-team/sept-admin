@@ -1,3 +1,7 @@
+import {Theme} from '@emotion/react';
+import {SxProps} from '@mui/material';
+import {AppDispatch, RootState} from '../../app/store';
+
 /**
  * Id
  */
@@ -35,4 +39,18 @@ export type Pagination = {
 export type Sort = {
     field: string;
     sort: 'asc' | 'desc';
+};
+
+/**
+ * Стили
+ */
+export type StylesDictionary = Record<string, SxProps<Theme>>;
+
+/**
+ * Базовые параметры ReduxThunk
+ */
+export type AppThunkParams = {
+    dispatch: AppDispatch;
+    state: RootState;
+    rejectValue: string; // Тип для rejectWithValue
 };

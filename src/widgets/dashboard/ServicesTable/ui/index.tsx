@@ -1,5 +1,5 @@
 import {Box} from '@mui/material';
-import {DataGrid, GridPaginationModel, GridSortModel} from '@mui/x-data-grid';
+import {DataGrid} from '@mui/x-data-grid';
 import {
     getServices,
     getServicesPagination,
@@ -7,54 +7,30 @@ import {
 } from '../../../../entities/service/model/selectors';
 import {prepareServicesToTable} from '../model/rows';
 import {getServiceTableColumns} from '../model/columns';
-import {useCallback, useState} from 'react';
-import {ServiceTableItem} from '../model/types';
-import {fetchServices} from '../../../../entities/service/model/thunk';
-import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
-import {Sort} from '../../../../shared/types/share';
+import {useAppSelector} from '../../../../app/store/hook';
+import {useServiceTableHandles} from '../model/handles';
 
 /**
  * Таблица услуг
  */
 const ServicesTable = () => {
-    const dispatch = useAppDispatch();
     const services = useAppSelector(getServices);
     const pagination = useAppSelector(getServicesPagination);
     const sort = useAppSelector(getServicesSort);
+
+    /**
+     * Получение данных для таблицы
+     */
+    const handles = useServiceTableHandles();
 
     const paginationModel = {
         page: pagination.currentPage,
         pageSize: pagination.perPage,
     };
 
-    const handleClickDelete = useCallback((data: ServiceTableItem) => {
-        console.log(data);
-    }, []);
-
-    const handlePaginationModelChange = (model: GridPaginationModel) => {
-        dispatch(
-            fetchServices({
-                page: model.page,
-                perPage: model.pageSize,
-            })
-        );
-    };
-
-    const handleSortModelChange = (model: GridSortModel) => {
-        const sort: Sort | null = model[0]
-            ? {...model[0], sort: model[0].sort ?? 'asc'}
-            : null;
-
-        dispatch(
-            fetchServices({
-                sort: sort,
-            })
-        );
-    };
-
     const rows = prepareServicesToTable(services);
     const columns = getServiceTableColumns({
-        handleClickDelete,
+        handleClickDelete: handles.handleClickDelete,
     });
 
     return (
@@ -65,11 +41,12 @@ const ServicesTable = () => {
                 paginationMode="server"
                 rowCount={pagination.total}
                 sortModel={sort ? [sort] : undefined}
-                onSortModelChange={handleSortModelChange}
+                onSortModelChange={handles.handleSortModelChange}
                 paginationModel={paginationModel}
-                onPaginationModelChange={handlePaginationModelChange}
+                onPaginationModelChange={handles.handlePaginationModelChange}
                 pageSizeOptions={[1, 5, 10, 25]}
                 loading={pagination.isLoading}
+                processRowUpdate={handles.handleProcessRowUpdate}
                 disableColumnFilter
                 disableColumnSelector
             />

@@ -1,7 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Service} from './types';
 import {Pagination, Sort} from '../../../shared/types/share';
-import {fetchServices} from './thunk';
+import {
+    addServiceAndRefresh,
+    changeServiceAndRefresh,
+    deleteServiceAndRefresh,
+    fetchServices,
+} from './thunk';
 
 /**
  * Слайс для хранения данных об услугах
@@ -50,9 +55,31 @@ const serviceSlice = createSlice({
             };
 
             // Ставим сортировку
-            if (action.payload.sort) state.sort = action.payload.sort;
+            if (action.payload.sort !== undefined)
+                state.sort = action.payload.sort;
 
             state.pagination.isLoading = false;
+        });
+
+        /**
+         * addServiceAndRefresh
+         */
+        builder.addCase(addServiceAndRefresh.pending, (state) => {
+            state.pagination.isLoading = true;
+        });
+
+        /**
+         * deleteServiceAndRefresh
+         */
+        builder.addCase(deleteServiceAndRefresh.pending, (state) => {
+            state.pagination.isLoading = true;
+        });
+
+        /**
+         * changeServiceAndRefresh
+         */
+        builder.addCase(changeServiceAndRefresh.pending, (state) => {
+            state.pagination.isLoading = true;
         });
     },
 });

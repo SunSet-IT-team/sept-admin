@@ -31,7 +31,7 @@ export const AppRouter = () => {
                     )
                 }
             >
-                <Route index element={<OrdersPage />} />
+                <Route index element={<ServicesPage />} />
                 <Route path={SlugPages.SERVICES} element={<ServicesPage />} />
                 <Route path={SlugPages.ORDERS} element={<OrdersPage />} />
                 <Route path={SlugPages.CUSTOMERS} element={<CustomersPage />} />
