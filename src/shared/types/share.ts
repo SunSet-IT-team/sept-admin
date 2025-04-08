@@ -2,7 +2,7 @@
  * Id
  */
 export type WithId = {
-    priority: number;
+    id: number;
 };
 
 /**
@@ -17,4 +17,22 @@ export type WithPriority = {
  */
 export type WithName = {
     name: string;
+};
+
+/**
+ * Пагинация
+ */
+export type Pagination = {
+    isLoading: boolean;
+    total: number;
+    currentPage: number;
+    perPage: number;
+};
+
+/**
+ * Сортировка
+ */
+export type Sort = {
+    field: string;
+    sort: 'asc' | 'desc';
 };

@@ -8,7 +8,7 @@ export interface ServiceApiMethods {
     /**
      * Получить все услуги
      */
-    getAll: () => AxiosPromise<GetAllDto[]>;
+    getAll: () => AxiosPromise<GetAllDto>;
 
     /**
      * Создать новую услугу
