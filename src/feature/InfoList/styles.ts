@@ -1,6 +1,4 @@
-import {SxProps, Theme} from '@mui/material/styles';
-
-type StylesDictionary = Record<string, SxProps<Theme>>;
+import {StylesDictionary} from '../../shared/types/share';
 
 export const useStyles = (): StylesDictionary => {
     return {

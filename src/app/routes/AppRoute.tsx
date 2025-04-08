@@ -1,5 +1,5 @@
 import {Route, Routes, Navigate} from 'react-router-dom';
-import {Layout} from '../../pages/Layout';
+import {MainLayout} from '../../pages/layouts/MainLayout';
 import LoginPage from '../../pages/auth/LoginPage';
 import RecoveryPage from '../../pages/auth/RecoveryPage';
 import OrdersPage from '../../pages/dashboard/OrdersPage';
@@ -9,23 +9,28 @@ import StatsPage from '../../pages/dashboard/StatsPage';
 import ServicesPage from '../../pages/dashboard/ServicesPage';
 import ChatPage from '../../pages/dashboard/ChatPage';
 import {SlugPages} from './pages';
+import {AuthLayout} from '../../pages/layouts/AuthLayout';
 
 export const AppRouter = () => {
-    const isAuthenticated = true; // Замени на реальную проверку авторизации (из Redux)
+    const isAuthenticated = true;
 
     return (
         <Routes>
-            {/*  @TODO Отключить доступ авторизованным челикам к страницам авторизации и регистрации*/}
             {/* Публичные маршруты (без шапки) */}
-            <Route path={`/${SlugPages.LOGIN}`} element={<LoginPage />} />
-            <Route path={`/${SlugPages.RECOVERY}`} element={<RecoveryPage />} />
+            <Route element={<AuthLayout />}>
+                <Route path={`/${SlugPages.LOGIN}`} element={<LoginPage />} />
+                <Route
+                    path={`/${SlugPages.RECOVERY}`}
+                    element={<RecoveryPage />}
+                />
+            </Route>
 
             {/* Приватные маршруты (с шапкой через Layout) */}
             <Route
                 path="/"
                 element={
                     isAuthenticated ? (
-                        <Layout />
+                        <MainLayout />
                     ) : (
                         <Navigate to={`/${SlugPages.LOGIN}`} replace />
                     )
