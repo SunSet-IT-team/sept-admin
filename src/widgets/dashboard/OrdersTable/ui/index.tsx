@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
 import {useServiceTableHandles} from '../model/handles';
 import {
     getOrders,
+    getOrdersFilters,
     getOrdersPagination,
     getOrdersSort,
 } from '../../../../entities/orders/model/selectors';
@@ -12,6 +13,7 @@ import {useEffect, useState} from 'react';
 import {OrderModal} from '../../../modals/OrderModal';
 import {Order} from '../../../../entities/orders/model/types';
 import {fetchOrders} from '../../../../entities/orders/model/thunk';
+import {OrdersFilter} from '../../../../feature/OrderFilters';
 
 /**
  * Таблица Заказов
@@ -22,6 +24,7 @@ const OrdersTable = () => {
     const orders = useAppSelector(getOrders);
     const pagination = useAppSelector(getOrdersPagination);
     const sort = useAppSelector(getOrdersSort);
+    const filters = useAppSelector(getOrdersFilters);
 
     const dispatch = useAppDispatch();
 
@@ -29,7 +32,7 @@ const OrdersTable = () => {
         const fetching = dispatch(fetchOrders());
 
         return () => fetching.abort();
-    }, [pagination.currentPage, pagination.perPage, dispatch, sort]);
+    }, [pagination.currentPage, pagination.perPage, dispatch, sort, filters]);
 
     /**
      * Получение данных для таблицы
@@ -51,6 +54,7 @@ const OrdersTable = () => {
     return (
         <>
             <Box sx={{height: 500, width: '100%', mt: 3}}>
+                <OrdersFilter />
                 <DataGrid
                     rows={orders}
                     columns={columns}

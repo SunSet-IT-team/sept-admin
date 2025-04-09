@@ -8,7 +8,7 @@ import {OrderSlice, OrderStatus} from './types';
 import {Service} from '../../service/model/types';
 import {Customer} from '../../customers/model/types';
 import {Executor, ExecutorServiceType} from '../../executors/model/types';
-import {Sort} from '../../../shared/types/share';
+import {Filter, Sort} from '../../../shared/types/share';
 
 const placeholderService: Service = {
     id: 5,
@@ -129,6 +129,7 @@ const initialState: OrderSlice = {
     },
 
     sort: null,
+    filters: [],
 };
 
 const orderSlice = createSlice({
@@ -152,6 +153,45 @@ const orderSlice = createSlice({
         setOrdersSort(state, action: PayloadAction<{sort: Sort | null}>) {
             state.pagination.currentPage = 0;
             state.sort = action.payload.sort;
+        },
+
+        /**
+         * Обновить фильтр
+         */
+        setOrdersFilters(state, action: PayloadAction<Filter | Filter[]>) {
+            let filters = action.payload;
+
+            // Преобразовываем чтобы можно было передавать и один фильтр
+            if (!Array.isArray(filters)) filters = [filters];
+
+            filters.map((filter) => {
+                const currentFilter = state.filters.find(
+                    (f) => f.name === filter.value
+                );
+
+                // Если есть фильтрили удаляем
+                if (currentFilter) {
+                    if (filter.value) {
+                        // Значит меняем значение
+                        currentFilter.value = filter.value;
+                    } else {
+                        // Или удаляем
+                        state.filters = state.filters.filter(
+                            (f) => f.name === filter.value
+                        );
+                    }
+                }
+
+                // В другом случае - добавляем
+                state.filters.push(filter);
+            });
+        },
+
+        /**
+         * Сбросить фильтры
+         */
+        resetFilters(state) {
+            state.filters = [];
         },
     },
     extraReducers: (builder) => {
@@ -181,6 +221,11 @@ const orderSlice = createSlice({
     },
 });
 
-export const {setOrdersPagination, setOrdersSort} = orderSlice.actions;
+export const {
+    setOrdersPagination,
+    setOrdersSort,
+    setOrdersFilters,
+    resetFilters,
+} = orderSlice.actions;
 
 export const ordersReducer = orderSlice.reducer;

@@ -15,3 +15,8 @@ export const getOrdersPagination = (state: RootState) =>
  * Получить сортировку заказов
  */
 export const getOrdersSort = (state: RootState) => state.orders.sort;
+
+/**
+ * Получить фильтры
+ */
+export const getOrdersFilters = (state: RootState) => state.orders.filters;

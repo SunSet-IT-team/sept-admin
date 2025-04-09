@@ -1,4 +1,4 @@
-import {WithId, WithPriority} from '../../../shared/types/share';
+import {Filter, WithId, WithPriority} from '../../../shared/types/share';
 import {Pagination, Sort} from '../../../shared/types/share';
 import {Customer} from '../../customers/model/types';
 import {Executor} from '../../executors/model/types';
@@ -11,6 +11,7 @@ export interface OrderSlice {
     orders: Order[];
     pagination: Pagination;
     sort: Sort | null;
+    filters: Filter[];
 }
 
 /**

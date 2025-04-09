@@ -68,3 +68,11 @@ export type AppThunkParams = {
     state: RootState;
     rejectValue: string; // Тип для rejectWithValue
 };
+
+/**
+ * Фильтр
+ */
+export type Filter = {
+    name: string;
+    value: string | number;
+};
