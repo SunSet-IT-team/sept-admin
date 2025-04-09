@@ -7,6 +7,14 @@ import {
 } from '../../../shared/types/share';
 
 /**
+ * Слайс для хранения данных об исполнителях
+ */
+export interface ExecutorsSlice {
+    executors: Executor[];
+    isLoading: boolean;
+}
+
+/**
  * Исполнитель
  */
 export type Executor = WithPriority &
