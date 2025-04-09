@@ -21,6 +21,8 @@ export type Order = WithPriority &
         executor: string;
         status: OrderStatus;
         city: string;
+        detailes?: OrderDetailes;
+        review?: Review;
     };
 
 /**
@@ -32,3 +34,23 @@ export enum OrderStatus {
     CANCELED = 'CANCELED',
     DONE = 'DONE',
 }
+
+/**
+ * Детали заказа
+ */
+export type OrderDetailes = {
+    openDate: string;
+    paymentMethod: string;
+    volume: string;
+    structureType: string;
+    comment: string;
+};
+
+/**
+ * Отзыв
+ */
+export type Review = {
+    customer: number;
+    rate: 1 | 2 | 3 | 4 | 5;
+    text: string;
+};

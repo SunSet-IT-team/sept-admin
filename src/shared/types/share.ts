@@ -17,6 +17,20 @@ export type WithPriority = {
 };
 
 /**
+ * Email
+ */
+export type WithEmail = {
+    email: string;
+};
+
+/**
+ * Телефон
+ */
+export type WithPhone = {
+    phone: string;
+};
+
+/**
  * Название
  */
 export type WithName = {
