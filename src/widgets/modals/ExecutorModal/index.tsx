@@ -20,12 +20,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import {Executor} from '../../../entities/executors/model/types';
 import ExecutorModalStats from './components/ExecutorModalStats';
 import ExecutorModalDocs from './components/ExecutorModalDocs';
+import {useAppDispatch} from '../../../app/store/hook';
+import {deleteExecutorAndRefresh} from '../../../entities/executors/model/thunk';
 
 type ExecutorModalProps = {
     open: boolean;
     onClose: () => void;
-    onDelete: () => void;
-    executor: Executor;
+    executor: Executor | null;
 };
 
 /**
@@ -34,9 +35,17 @@ type ExecutorModalProps = {
 export const ExecutorModal: React.FC<ExecutorModalProps> = ({
     open,
     onClose,
-    onDelete,
     executor,
 }) => {
+    const dispatch = useAppDispatch();
+
+    if (!executor) return;
+
+    const handleClickDelete = () => {
+        dispatch(deleteExecutorAndRefresh(executor.id));
+        onClose();
+    };
+
     return (
         <Dialog
             open={open}
@@ -93,7 +102,7 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
                     variant="outlined"
                     color="error"
                     startIcon={<DeleteIcon />}
-                    onClick={onDelete}
+                    onClick={handleClickDelete}
                 >
                     Удалить
                 </Button>

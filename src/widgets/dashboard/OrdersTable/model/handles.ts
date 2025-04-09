@@ -16,7 +16,7 @@ import {
 /**
  * Обработчики различных событий
  */
-export const useServiceTableHandles = () => {
+export const useOrdersTableHandles = () => {
     const dispatch = useAppDispatch();
 
     /**

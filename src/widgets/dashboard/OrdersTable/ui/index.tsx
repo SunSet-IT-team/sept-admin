@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
 import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
-import {useServiceTableHandles} from '../model/handles';
+import {useOrdersTableHandles} from '../model/handles';
 import {
     getOrders,
     getOrdersFilters,
@@ -37,7 +37,7 @@ const OrdersTable = () => {
     /**
      * Получение данных для таблицы
      */
-    const handles = useServiceTableHandles();
+    const handles = useOrdersTableHandles();
 
     const paginationModel = {
         page: pagination.currentPage,

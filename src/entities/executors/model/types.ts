@@ -27,6 +27,7 @@ export type Executor = WithPriority &
         experience: string;
         typeService: ExecutorServiceType;
         city: string;
+        orderQty: number;
         docs: {
             register: string;
             approve: string;

@@ -1,12 +1,12 @@
 import {RootState} from '../../../app/store';
 
 /**
- * Получить всех Исполнителей
+ * Получить всех заказчиков
  */
-export const getExecutors = (state: RootState) => state.executors.executors;
+export const getCustomers = (state: RootState) => state.customers.customers;
 
 /**
  * Получить состояние загрузки
  */
-export const getExecutorsIsLoading = (state: RootState) =>
-    state.executors.isLoading;
+export const getCustomersIsLoading = (state: RootState) =>
+    state.customers.isLoading;

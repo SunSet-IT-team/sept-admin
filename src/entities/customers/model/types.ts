@@ -23,6 +23,7 @@ export type Customer = WithPriority &
     WithEmail &
     WithPhone & {
         profileImage: string;
+        orderQty: number;
         addresses: Address[];
     };
 

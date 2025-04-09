@@ -18,6 +18,7 @@ const placeholderExecutor: Executor = {
     experience: '20 лет',
     typeService: ExecutorServiceType.LEGAL_ENTITY,
     city: 'Воронеж',
+    orderQty: 20,
     docs: {
         register: '',
         approve: '',
@@ -29,7 +30,7 @@ const placeholderExecutor: Executor = {
 };
 
 const initialState: ExecutorsSlice = {
-    executors: [],
+    executors: [placeholderExecutor, placeholderExecutor, placeholderExecutor],
     isLoading: false,
 };
 

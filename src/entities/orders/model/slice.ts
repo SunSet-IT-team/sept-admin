@@ -23,6 +23,7 @@ const placeholderCustomer: Customer = {
     email: 'test@mail.ru',
     phone: '89009009999',
     profileImage: '',
+    orderQty: 100,
     addresses: [
         {
             id: 1,
@@ -42,6 +43,7 @@ const placeholderExecutor: Executor = {
     experience: '20 лет',
     typeService: ExecutorServiceType.LEGAL_ENTITY,
     city: 'Воронеж',
+    orderQty: 20,
     docs: {
         register: '',
         approve: '',

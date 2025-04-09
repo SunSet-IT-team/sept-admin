@@ -14,6 +14,22 @@ const placeholderCustomer: Customer = {
     email: 'test@mail.ru',
     phone: '89009009999',
     profileImage: '',
+    orderQty: 100,
+    addresses: [
+        {
+            id: 1,
+            address: 'Ул. Пушкина дом колотушкина',
+        },
+    ],
+};
+const placeholderCustomer2: Customer = {
+    id: 10,
+    priority: 100,
+    name: 'Ип иванов',
+    email: 'test@mail.ru',
+    phone: '890090099939',
+    profileImage: '',
+    orderQty: 10,
     addresses: [
         {
             id: 1,
@@ -23,7 +39,7 @@ const placeholderCustomer: Customer = {
 };
 
 const initialState: CustomersSlice = {
-    customers: [],
+    customers: [placeholderCustomer, placeholderCustomer2],
     isLoading: false,
 };
 
