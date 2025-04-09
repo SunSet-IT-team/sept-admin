@@ -35,6 +35,7 @@ const LoginForm = () => {
             />
 
             <PasswordField
+                label="Пароль"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
