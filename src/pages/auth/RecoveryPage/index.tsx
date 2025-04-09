@@ -6,7 +6,6 @@ import RecoveryForm from '../../../widgets/RecoveryForm';
 const RecoveryPage = () => {
     return (
         <>
-            <p className="">Logo</p>
             <RecoveryForm />
         </>
     );
