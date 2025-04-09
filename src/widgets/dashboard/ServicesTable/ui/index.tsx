@@ -5,7 +5,6 @@ import {
     getServicesPagination,
     getServicesSort,
 } from '../../../../entities/service/model/selectors';
-import {prepareServicesToTable} from '../model/rows';
 import {getServiceTableColumns} from '../model/columns';
 import {useAppSelector} from '../../../../app/store/hook';
 import {useServiceTableHandles} from '../model/handles';
@@ -28,7 +27,6 @@ const ServicesTable = () => {
         pageSize: pagination.perPage,
     };
 
-    const rows = prepareServicesToTable(services);
     const columns = getServiceTableColumns({
         handleClickDelete: handles.handleClickDelete,
     });
@@ -36,7 +34,7 @@ const ServicesTable = () => {
     return (
         <Box sx={{height: 500, width: '100%', mt: 3}}>
             <DataGrid
-                rows={rows}
+                rows={services}
                 columns={columns}
                 paginationMode="server"
                 rowCount={pagination.total}

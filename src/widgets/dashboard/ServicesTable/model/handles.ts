@@ -1,6 +1,5 @@
 import {GridPaginationModel, GridSortModel} from '@mui/x-data-grid';
 import {useCallback} from 'react';
-import {ServiceTableItem} from '../model/types';
 import {
     changeServiceAndRefresh,
     deleteServiceAndRefresh,
@@ -9,6 +8,7 @@ import {
 import {Sort} from '../../../../shared/types/share';
 import {getChangedFieldName} from '../../../../shared/utils/table';
 import {useAppDispatch} from '../../../../app/store/hook';
+import {Service} from '../../../../entities/service/model/types';
 
 /**
  * Обработчики различных событий
@@ -19,7 +19,7 @@ export const useServiceTableHandles = () => {
     /**
      * Обработчик клика для удаления
      */
-    const handleClickDelete = useCallback((data: ServiceTableItem) => {
+    const handleClickDelete = useCallback((data: Service) => {
         dispatch(deleteServiceAndRefresh(data.id));
     }, []);
 
@@ -53,10 +53,7 @@ export const useServiceTableHandles = () => {
     /**
      * Изменение приоритета
      */
-    const handleProcessRowUpdate = async (
-        newRow: ServiceTableItem,
-        oldRow: ServiceTableItem
-    ) => {
+    const handleProcessRowUpdate = async (newRow: Service, oldRow: Service) => {
         const changedType = getChangedFieldName(newRow, oldRow);
 
         if (changedType !== 'priority') return newRow;

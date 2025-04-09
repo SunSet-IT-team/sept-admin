@@ -94,23 +94,20 @@ export const deleteOrderAndRefresh = createAsyncThunk<
     void,
     number,
     AppThunkParams
->(
-    'services/deleteServiceAndRefresh',
-    async (id, {dispatch, rejectWithValue}) => {
-        try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
+>('orders/deleteOrderAndRefresh', async (id, {dispatch, rejectWithValue}) => {
+    try {
+        // Заглушка
+        await new Promise((resolve) => {
+            setTimeout(() => resolve([]), 2000);
+        });
 
-            // await ServiceApi.delete(id);
+        // await ServiceApi.delete(id);
 
-            dispatch(fetchOrders());
-        } catch (error: any) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка');
-        }
+        dispatch(fetchOrders());
+    } catch (error: any) {
+        return rejectWithValue(error.response?.data?.message || 'Ошибка');
     }
-);
+});
 
 type ChangeOrderAndRefresh = {
     id: number;
@@ -124,20 +121,17 @@ export const changeOrderAndRefresh = createAsyncThunk<
     void,
     ChangeOrderAndRefresh,
     AppThunkParams
->(
-    'services/changeServiceAndRefresh',
-    async (data, {dispatch, rejectWithValue}) => {
-        try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
+>('orders/changeOrderAndRefresh', async (data, {dispatch, rejectWithValue}) => {
+    try {
+        // Заглушка
+        await new Promise((resolve) => {
+            setTimeout(() => resolve([]), 2000);
+        });
 
-            // await ServiceApi.changePriority(data.id, data);
+        // await ServiceApi.changePriority(data.id, data);
 
-            dispatch(fetchOrders());
-        } catch (error: any) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка');
-        }
+        dispatch(fetchOrders());
+    } catch (error: any) {
+        return rejectWithValue(error.response?.data?.message || 'Ошибка');
     }
-);
+});
