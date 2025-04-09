@@ -7,7 +7,7 @@ import {
 import {ExecutorsSlice} from './types';
 import {Executor, ExecutorServiceType} from '../../executors/model/types';
 
-const placeholderExecutor: Executor = {
+export const placeholderExecutor: Executor = {
     id: 1,
     priority: 100,
     name: 'ООО септики',
