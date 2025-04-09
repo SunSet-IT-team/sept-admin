@@ -1,5 +1,8 @@
 import {WithId, WithPriority} from '../../../shared/types/share';
 import {Pagination, Sort} from '../../../shared/types/share';
+import {Customer} from '../../customers/model/types';
+import {Executor} from '../../executors/model/types';
+import {Service} from '../../service/model/types';
 
 /**
  * Слайс для хранения данных об услугах
@@ -15,10 +18,10 @@ export interface OrderSlice {
  */
 export type Order = WithPriority &
     WithId & {
-        customer: string;
+        customer: Customer;
         date: string;
-        service: string;
-        executor: string;
+        service: Service;
+        executor: Executor;
         status: OrderStatus;
         city: string;
         detailes?: OrderDetailes;
@@ -39,7 +42,7 @@ export enum OrderStatus {
  * Детали заказа
  */
 export type OrderDetailes = {
-    openDate: string;
+    openDate: number;
     paymentMethod: string;
     volume: string;
     structureType: string;
@@ -50,7 +53,7 @@ export type OrderDetailes = {
  * Отзыв
  */
 export type Review = {
-    customer: number;
+    customerId: number;
     rate: 1 | 2 | 3 | 4 | 5;
     text: string;
 };

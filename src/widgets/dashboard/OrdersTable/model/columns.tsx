@@ -2,6 +2,10 @@ import {GridColDef} from '@mui/x-data-grid';
 import {Delete, Visibility} from '@mui/icons-material';
 import {IconButton} from '@mui/material';
 import {Order} from '../../../../entities/orders/model/types';
+import {
+    formatDateToDMY,
+    mapOrderStatus,
+} from '../../../../shared/utils/formatter';
 
 type getOrdersTableColumnsParams = {
     handleClickDelete: (data: Order) => void;
@@ -21,21 +25,29 @@ export const getOrdersTableColumns = (
             field: 'customer',
             headerName: 'Заказчик',
             flex: 1,
+            valueGetter: (_, row) => row.customer.name,
         },
         {
             field: 'date',
             headerName: 'Дата',
             flex: 1,
+            valueGetter: (_, row) => {
+                return row.detailes?.openDate
+                    ? formatDateToDMY(row.detailes?.openDate)
+                    : 'Даты нет';
+            },
         },
         {
             field: 'service',
             headerName: 'Услуга',
             flex: 1,
+            valueGetter: (_, row) => row.service.name,
         },
         {
             field: 'executor',
             headerName: 'Исполнитель',
             flex: 1,
+            valueGetter: (_, row) => row.customer.name,
         },
         {
             field: 'priority',
@@ -47,6 +59,7 @@ export const getOrdersTableColumns = (
             field: 'status',
             headerName: 'Статус',
             flex: 1,
+            valueGetter: (_, row) => mapOrderStatus(row.status),
         },
 
         {

@@ -5,55 +5,115 @@ import {
     fetchOrders,
 } from './thunk';
 import {OrderSlice, OrderStatus} from './types';
+import {Service} from '../../service/model/types';
+import {Customer} from '../../customers/model/types';
+import {Executor, ExecutorServiceType} from '../../executors/model/types';
+
+const placeholderService: Service = {
+    id: 5,
+    name: 'Установка ПО',
+    priority: 100,
+};
+
+const placeholderCustomer: Customer = {
+    id: 1,
+    priority: 100,
+    name: 'ООО септики',
+    email: 'test@mail.ru',
+    phone: '89009009999',
+    profileImage: '',
+    addresses: [
+        {
+            id: 1,
+            address: 'Ул. Пушкина дом колотушкина',
+        },
+    ],
+};
+
+const placeholderExecutor: Executor = {
+    id: 1,
+    priority: 100,
+    name: 'ООО септики',
+    email: 'test@mail.ru',
+    phone: '89009009999',
+    profileImage: '',
+    about: 'Самая лучшая компания',
+    experience: '20 лет',
+    typeService: ExecutorServiceType.LEGAL_ENTITY,
+    city: 'Воронеж',
+    docs: {
+        register: '',
+        approve: '',
+    },
+    rating: {
+        value: 4.8,
+        count: 100,
+    },
+};
+
+const placeholderDate = new Date().getTime();
 
 const initialState: OrderSlice = {
     orders: [
         {
             id: 1,
-            customer: '+79484657734',
+            customer: placeholderCustomer,
             date: '01.01.2024',
-            service: 'очистка септика',
-            executor: 'ООО Септик',
+            service: placeholderService,
+            executor: placeholderExecutor,
             status: OrderStatus.PROCESS,
             priority: 100,
             city: 'Москва',
         },
         {
             id: 2,
-            customer: '+79484657734',
+            customer: placeholderCustomer,
             date: '01.01.2024',
-            service: 'установка септика',
-            executor: 'ООО Септик',
+            service: placeholderService,
+            executor: placeholderExecutor,
             status: OrderStatus.PROCESS,
             priority: 100,
             city: 'Москва',
+            review: {
+                customerId: 1,
+                rate: 5,
+                text: 'Test Test Test Test Test Test Test Test ',
+            },
+            detailes: {
+                openDate: placeholderDate,
+                paymentMethod: 'Наличные',
+
+                volume: '10kb',
+                structureType: 'Тип структуры',
+                comment: 'Большой-большой-комментарий',
+            },
         },
         {
             id: 3,
-            customer: '+79484657734',
+            customer: placeholderCustomer,
             date: '01.01.2024',
-            service: 'очистка септика',
-            executor: 'ООО Септик',
+            service: placeholderService,
+            executor: placeholderExecutor,
             status: OrderStatus.CANCELED,
             priority: 100,
             city: 'Москва',
         },
         {
             id: 4,
-            customer: '+79484657734',
+            customer: placeholderCustomer,
             date: '01.01.2024',
-            service: 'установка септика',
-            executor: 'ООО Септик',
+            service: placeholderService,
+            executor: placeholderExecutor,
             status: OrderStatus.PROCESS,
             priority: 100,
             city: 'Москва',
         },
         {
             id: 5,
-            customer: '+79484657734',
+            customer: placeholderCustomer,
             date: '01.01.2024',
-            service: 'очистка септика',
-            executor: 'ООО Септик',
+            service: placeholderService,
+            executor: placeholderExecutor,
             status: OrderStatus.DONE,
             priority: 100,
             city: 'Москва',
