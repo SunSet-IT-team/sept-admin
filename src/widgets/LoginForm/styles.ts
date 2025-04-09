@@ -6,7 +6,8 @@ export const useStyles = (): StylesDictionary => {
 
     return {
         form: {
-            maxWidth: 400,
+            width: '100%',
+            maxWidth: 420,
             margin: '0 auto',
             padding: 4,
             display: 'flex',
