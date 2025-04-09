@@ -11,7 +11,6 @@ import {useStyles} from './styles';
 const Profile = () => {
     const user = useSelector(getCurrentUser) as User;
     const styles = useStyles();
-    console.log(styles);
 
     return (
         <Stack>

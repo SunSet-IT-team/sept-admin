@@ -1,22 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Service} from './types';
-import {Pagination, Sort} from '../../../shared/types/share';
 import {
     addServiceAndRefresh,
     changeServiceAndRefresh,
     deleteServiceAndRefresh,
     fetchServices,
 } from './thunk';
+import {ServiceSlice} from './types';
 
 /**
  * Слайс для хранения данных об услугах
  */
-interface ServiceSlice {
-    services: Service[];
-    pagination: Pagination;
-    sort: Sort | null;
-}
-
 const initialState: ServiceSlice = {
     services: [
         {id: 1, name: 'Диагностика', priority: 100},
