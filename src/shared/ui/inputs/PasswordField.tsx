@@ -1,48 +1,46 @@
-import React, {useState} from 'react';
-import {TextField, IconButton, InputAdornment} from '@mui/material';
+import {useState, forwardRef} from 'react';
+import {
+    TextField,
+    IconButton,
+    InputAdornment,
+    TextFieldProps,
+} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 
-type PasswordFieldProps = {
-    value: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    label?: string;
-};
+type PasswordFieldProps = TextFieldProps;
 
 /**
  * Поле для ввода и просмотра пароля
  */
-const PasswordField: React.FC<PasswordFieldProps> = ({
-    value,
-    onChange,
-    label = 'Пароль',
-}) => {
-    const [showPassword, setShowPassword] = useState(false);
+const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
+    ({type, ...props}, ref) => {
+        const [showPassword, setShowPassword] = useState(false);
 
-    const toggleShowPassword = () => setShowPassword((prev) => !prev);
+        const toggleVisibility = () => setShowPassword((prev) => !prev);
 
-    return (
-        <TextField
-            label={label}
-            variant="outlined"
-            fullWidth
-            type={showPassword ? 'text' : 'password'}
-            value={value}
-            onChange={onChange}
-            InputProps={{
-                endAdornment: (
-                    <InputAdornment position="end">
-                        <IconButton
-                            onClick={toggleShowPassword}
-                            edge="end"
-                            aria-label="показать пароль"
-                        >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                ),
-            }}
-        />
-    );
-};
+        return (
+            <TextField
+                {...props}
+                type={showPassword ? 'text' : 'password'}
+                inputRef={ref}
+                fullWidth
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton onClick={toggleVisibility} edge="end">
+                                {showPassword ? (
+                                    <VisibilityOff />
+                                ) : (
+                                    <Visibility />
+                                )}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                    ...props.InputProps,
+                }}
+            />
+        );
+    }
+);
 
 export default PasswordField;
