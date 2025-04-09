@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
     changeOrderAndRefresh,
     deleteOrderAndRefresh,
@@ -8,6 +8,7 @@ import {OrderSlice, OrderStatus} from './types';
 import {Service} from '../../service/model/types';
 import {Customer} from '../../customers/model/types';
 import {Executor, ExecutorServiceType} from '../../executors/model/types';
+import {Sort} from '../../../shared/types/share';
 
 const placeholderService: Service = {
     id: 5,
@@ -133,7 +134,26 @@ const initialState: OrderSlice = {
 const orderSlice = createSlice({
     name: 'orders',
     initialState,
-    reducers: {},
+    reducers: {
+        /**
+         * Обновление пагинации
+         */
+        setOrdersPagination(
+            state,
+            action: PayloadAction<{page: number; perPage: number}>
+        ) {
+            state.pagination.currentPage = action.payload.page;
+            state.pagination.perPage = action.payload.perPage;
+        },
+
+        /**
+         * Обновление сортировка
+         */
+        setOrdersSort(state, action: PayloadAction<{sort: Sort | null}>) {
+            state.pagination.currentPage = 0;
+            state.sort = action.payload.sort;
+        },
+    },
     extraReducers: (builder) => {
         /**
          * fetchOrders
@@ -142,16 +162,6 @@ const orderSlice = createSlice({
             state.pagination.isLoading = true;
         });
         builder.addCase(fetchOrders.fulfilled, (state, action) => {
-            // Ставим пагинацию
-            state.pagination = {
-                ...state.pagination,
-                ...action.payload.pagination,
-            };
-
-            // Ставим сортировку
-            if (action.payload.sort !== undefined)
-                state.sort = action.payload.sort;
-
             state.pagination.isLoading = false;
         });
 
@@ -170,5 +180,7 @@ const orderSlice = createSlice({
         });
     },
 });
+
+export const {setOrdersPagination, setOrdersSort} = orderSlice.actions;
 
 export const ordersReducer = orderSlice.reducer;

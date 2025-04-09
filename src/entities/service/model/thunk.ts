@@ -3,12 +3,6 @@ import {ServiceApi} from '../api';
 import {Service} from './types';
 import {AppThunkParams, Sort} from '../../../shared/types/share';
 
-type FetchServicesParam = {
-    page?: number;
-    perPage?: number;
-    sort?: Sort | null;
-};
-
 export type FetchedServices = {
     services: Service[];
     pagination: {
@@ -24,37 +18,27 @@ export type FetchedServices = {
  */
 export const fetchServices = createAsyncThunk<
     FetchedServices,
-    FetchServicesParam | undefined,
+    undefined,
     AppThunkParams
->('services/fetchServices', async (data, {getState, rejectWithValue}) => {
+>('services/fetchServices', async (_, {getState, rejectWithValue}) => {
     try {
         const res: FetchedServices = {
             services: [],
             pagination: {},
         };
 
-        const params = data ? data : {};
+        // Массив параметров для запроса
+        const params: any = {};
 
-        const state = getState().service;
+        const state = getState().orders;
 
         // Добавляем параметры пагинации
-        if (params.page) {
-            res.pagination.page = params.page;
-        } else {
+        if (state.pagination.currentPage)
             params.page = state.pagination.currentPage;
-        }
-        if (params.perPage) {
-            res.pagination.perPage = params.perPage;
-        } else {
-            params.perPage = state.pagination.perPage;
-        }
+        if (state.pagination.perPage) params.perPage = state.pagination.perPage;
 
         // Добавляем сортировку
-        if (params.sort !== undefined) {
-            res.sort = params.sort;
-        } else {
-            params.sort = state.sort;
-        }
+        if (state.sort) params.sort = state.sort;
 
         // const response = await ServiceApi.getAll();
         // Заглушка
@@ -68,14 +52,7 @@ export const fetchServices = createAsyncThunk<
         //     priority: el.priority,
         // }));
 
-        // Сохраняем услуги
-        const services: Service[] = response.map((el) => ({
-            name: el.name,
-            id: el.id,
-            priority: el.priority,
-        }));
-
-        res.services = services;
+        res.services = response;
 
         return res;
     } catch (error: any) {

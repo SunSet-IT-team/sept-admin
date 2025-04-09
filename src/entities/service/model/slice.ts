@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
     addServiceAndRefresh,
     changeServiceAndRefresh,
@@ -6,6 +6,7 @@ import {
     fetchServices,
 } from './thunk';
 import {ServiceSlice} from './types';
+import {Sort} from '../../../shared/types/share';
 
 /**
  * Слайс для хранения данных об услугах
@@ -32,7 +33,26 @@ const initialState: ServiceSlice = {
 const serviceSlice = createSlice({
     name: 'services',
     initialState,
-    reducers: {},
+    reducers: {
+        /**
+         * Обновление пагинации
+         */
+        setServicesPagination(
+            state,
+            action: PayloadAction<{page: number; perPage: number}>
+        ) {
+            state.pagination.currentPage = action.payload.page;
+            state.pagination.perPage = action.payload.perPage;
+        },
+
+        /**
+         * Обновление сортировка
+         */
+        setServicesSort(state, action: PayloadAction<{sort: Sort | null}>) {
+            state.pagination.currentPage = 0;
+            state.sort = action.payload.sort;
+        },
+    },
     extraReducers: (builder) => {
         /**
          * fetchServices
@@ -76,5 +96,7 @@ const serviceSlice = createSlice({
         });
     },
 });
+
+export const {setServicesPagination, setServicesSort} = serviceSlice.actions;
 
 export const serviceReducer = serviceSlice.reducer;

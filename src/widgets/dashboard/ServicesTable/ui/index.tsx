@@ -6,8 +6,10 @@ import {
     getServicesSort,
 } from '../../../../entities/service/model/selectors';
 import {getServiceTableColumns} from '../model/columns';
-import {useAppSelector} from '../../../../app/store/hook';
+import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
 import {useServiceTableHandles} from '../model/handles';
+import {fetchServices} from '../../../../entities/service/model/thunk';
+import {useEffect} from 'react';
 
 /**
  * Таблица услуг
@@ -16,6 +18,14 @@ const ServicesTable = () => {
     const services = useAppSelector(getServices);
     const pagination = useAppSelector(getServicesPagination);
     const sort = useAppSelector(getServicesSort);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const fetching = dispatch(fetchServices());
+
+        return () => fetching.abort();
+    }, [pagination.currentPage, pagination.perPage, dispatch, sort]);
 
     /**
      * Получение данных для таблицы

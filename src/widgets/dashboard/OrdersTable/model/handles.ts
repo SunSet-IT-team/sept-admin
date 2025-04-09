@@ -7,8 +7,11 @@ import {Order} from '../../../../entities/orders/model/types';
 import {
     changeOrderAndRefresh,
     deleteOrderAndRefresh,
-    fetchOrders,
 } from '../../../../entities/orders/model/thunk';
+import {
+    setOrdersPagination,
+    setOrdersSort,
+} from '../../../../entities/orders/model/slice';
 
 /**
  * Обработчики различных событий
@@ -28,7 +31,7 @@ export const useServiceTableHandles = () => {
      */
     const handlePaginationModelChange = (model: GridPaginationModel) => {
         dispatch(
-            fetchOrders({
+            setOrdersPagination({
                 page: model.page,
                 perPage: model.pageSize,
             })
@@ -44,7 +47,7 @@ export const useServiceTableHandles = () => {
             : null;
 
         dispatch(
-            fetchOrders({
+            setOrdersSort({
                 sort: sort,
             })
         );

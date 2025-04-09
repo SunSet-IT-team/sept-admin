@@ -1,6 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
-import {useAppSelector} from '../../../../app/store/hook';
+import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
 import {useServiceTableHandles} from '../model/handles';
 import {
     getOrders,
@@ -8,9 +8,10 @@ import {
     getOrdersSort,
 } from '../../../../entities/orders/model/selectors';
 import {getOrdersTableColumns} from '../model/columns';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {OrderModal} from '../../../modals/OrderModal';
 import {Order} from '../../../../entities/orders/model/types';
+import {fetchOrders} from '../../../../entities/orders/model/thunk';
 
 /**
  * Таблица Заказов
@@ -21,6 +22,14 @@ const OrdersTable = () => {
     const orders = useAppSelector(getOrders);
     const pagination = useAppSelector(getOrdersPagination);
     const sort = useAppSelector(getOrdersSort);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const fetching = dispatch(fetchOrders());
+
+        return () => fetching.abort();
+    }, [pagination.currentPage, pagination.perPage, dispatch, sort]);
 
     /**
      * Получение данных для таблицы

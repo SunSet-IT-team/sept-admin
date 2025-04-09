@@ -3,12 +3,15 @@ import {useCallback} from 'react';
 import {
     changeServiceAndRefresh,
     deleteServiceAndRefresh,
-    fetchServices,
 } from '../../../../entities/service/model/thunk';
 import {Sort} from '../../../../shared/types/share';
 import {getChangedFieldName} from '../../../../shared/utils/table';
 import {useAppDispatch} from '../../../../app/store/hook';
 import {Service} from '../../../../entities/service/model/types';
+import {
+    setServicesPagination,
+    setServicesSort,
+} from '../../../../entities/service/model/slice';
 
 /**
  * Обработчики различных событий
@@ -28,7 +31,7 @@ export const useServiceTableHandles = () => {
      */
     const handlePaginationModelChange = (model: GridPaginationModel) => {
         dispatch(
-            fetchServices({
+            setServicesPagination({
                 page: model.page,
                 perPage: model.pageSize,
             })
@@ -44,7 +47,7 @@ export const useServiceTableHandles = () => {
             : null;
 
         dispatch(
-            fetchServices({
+            setServicesSort({
                 sort: sort,
             })
         );

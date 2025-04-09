@@ -1,21 +1,10 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppThunkParams, Sort} from '../../../shared/types/share';
-import {Order, OrderStatus} from './types';
-
-type FetchOrdersParam = {
-    page?: number;
-    perPage?: number;
-    sort?: Sort | null;
-};
+import {AppThunkParams} from '../../../shared/types/share';
+import {Order} from './types';
 
 export type FetchedOrders = {
     orders: Order[];
-    pagination: {
-        total?: number;
-        page?: number;
-        perPage?: number;
-    };
-    sort?: Sort | null;
+    total: number;
 };
 
 /**
@@ -23,37 +12,27 @@ export type FetchedOrders = {
  */
 export const fetchOrders = createAsyncThunk<
     FetchedOrders,
-    FetchOrdersParam | undefined,
+    undefined,
     AppThunkParams
->('orders/fetchOrders', async (data, {getState, rejectWithValue}) => {
+>('orders/fetchOrders', async (_, {getState, rejectWithValue}) => {
     try {
         const res: FetchedOrders = {
             orders: [],
-            pagination: {},
+            total: 0,
         };
 
-        const params = data ? data : {};
+        // Массив параметров для запроса
+        const params: any = {};
 
-        const state = getState().service;
+        const state = getState().orders;
 
         // Добавляем параметры пагинации
-        if (params.page) {
-            res.pagination.page = params.page;
-        } else {
+        if (state.pagination.currentPage)
             params.page = state.pagination.currentPage;
-        }
-        if (params.perPage) {
-            res.pagination.perPage = params.perPage;
-        } else {
-            params.perPage = state.pagination.perPage;
-        }
+        if (state.pagination.perPage) params.perPage = state.pagination.perPage;
 
         // Добавляем сортировку
-        if (params.sort !== undefined) {
-            res.sort = params.sort;
-        } else {
-            params.sort = state.sort;
-        }
+        if (state.sort) params.sort = state.sort;
 
         // const response = await OrderApi.getAll();
         // const services: Service[] = response.data.map((el) => ({
@@ -67,19 +46,7 @@ export const fetchOrders = createAsyncThunk<
             setTimeout(() => resolve([]), 2000);
         });
 
-        // Сохраняем услуги
-        const orders: Order[] = response.map((el) => ({
-            id: 5,
-            customer: '+79484657734',
-            date: '01.01.2024',
-            service: 'очистка септика',
-            executor: 'ООО Септик',
-            status: OrderStatus.DONE,
-            priority: 100,
-            city: 'Москва',
-        }));
-
-        res.orders = orders;
+        res.orders = response;
 
         return res;
     } catch (error: any) {
