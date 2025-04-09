@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Box,
     Button,
@@ -11,56 +11,36 @@ import {
 } from '@mui/material';
 import {Clear, FilterAlt} from '@mui/icons-material';
 import {useStyles} from './styles';
-import {useSelector} from 'react-redux';
 import {getOrdersFilters} from '../../entities/orders/model/selectors';
-import {useAppDispatch} from '../../app/store/hook';
+import {useAppDispatch, useAppSelector} from '../../app/store/hook';
 import {
     resetFilters,
     setOrdersFilters,
 } from '../../entities/orders/model/slice';
+import {getExecutors} from '../../entities/executors/model/selectors';
+import {getCustomers} from '../../entities/customers/model/selectors';
+import {OrderStatus} from '../../entities/orders/model/types';
+import {mapOrderStatus} from '../../shared/utils/formatter';
 
-const customers = [
-    {
-        id: 1,
-        name: 'Первый',
-    },
-    {
-        id: 2,
-        name: 'Второй',
-    },
-    {
-        id: 3,
-        name: 'Третий',
-    },
-];
-
-const executors = [
-    {
-        id: 1,
-        name: 'Первый',
-    },
-    {
-        id: 2,
-        name: 'Второй',
-    },
-    {
-        id: 3,
-        name: 'Третий',
-    },
-];
-
-const statuses = ['qqq', 'www', 'eee'];
-
+const statuses = Object.values(OrderStatus);
 /**
  * Фильтры для страницы заказов
  */
 export const OrdersFilter = () => {
-    const filters = useSelector(getOrdersFilters);
-    const dispatch = useAppDispatch();
-
     const [customerId, setCustomerId] = useState<string | number>('');
     const [executorId, setExecutorId] = useState<string | number>('');
     const [status, setStatus] = useState<string | number>('');
+
+    const dispatch = useAppDispatch();
+
+    // Предвыбранные фильтры
+    const filters = useAppSelector(getOrdersFilters);
+
+    // Значения фильтра для исполнителей
+    const executors = useAppSelector(getExecutors);
+
+    // Значения фильтра для заказчиков
+    const customers = useAppSelector(getCustomers);
 
     useEffect(() => {
         const initCustomerId =
@@ -153,7 +133,7 @@ export const OrdersFilter = () => {
                         <MenuItem value="">Все статусы</MenuItem>
                         {statuses.map((status) => (
                             <MenuItem key={status} value={status}>
-                                {status}
+                                {mapOrderStatus(status)}
                             </MenuItem>
                         ))}
                     </Select>
