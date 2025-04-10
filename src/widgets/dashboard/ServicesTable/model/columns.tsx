@@ -1,15 +1,15 @@
 import {GridColDef} from '@mui/x-data-grid';
-import {ServiceTableItem} from './types';
 import {Delete} from '@mui/icons-material';
 import {IconButton} from '@mui/material';
+import {Service} from '../../../../entities/service/model/types';
 
 type getServiceTableColumnsParams = {
-    handleClickDelete: (data: ServiceTableItem) => void;
+    handleClickDelete: (data: Service) => void;
 };
 
 export const getServiceTableColumns = (
     data: getServiceTableColumnsParams
-): GridColDef<ServiceTableItem>[] => {
+): GridColDef<Service>[] => {
     return [
         {
             field: 'id',
