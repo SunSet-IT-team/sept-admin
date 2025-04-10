@@ -76,3 +76,11 @@ export type Filter = {
     name: string;
     value: string | number;
 };
+
+/**
+ * Ответ сервера
+ */
+export type ServerAns<T> = T & {
+    success: boolean;
+    error?: string;
+};

@@ -11,14 +11,26 @@ import ChatsPage from '../../pages/dashboard/ChatsPage';
 import {SlugPages} from './pages';
 import {AuthLayout} from '../../pages/layouts/AuthLayout';
 import ChatPage from '../../pages/ChatPage';
+import {useAppSelector} from '../store/hook';
+import {getCurrentUser} from '../../entities/user/model/selectors';
 
 export const AppRouter = () => {
-    const isAuthenticated = true;
+    const user = useAppSelector(getCurrentUser);
+
+    const isAuthenticated = user !== null;
 
     return (
         <Routes>
             {/* Публичные маршруты (без шапки) */}
-            <Route element={<AuthLayout />}>
+            <Route
+                element={
+                    !isAuthenticated ? (
+                        <AuthLayout />
+                    ) : (
+                        <Navigate to={`/`} replace />
+                    )
+                }
+            >
                 <Route path={`/${SlugPages.LOGIN}`} element={<LoginPage />} />
                 <Route
                     path={`/${SlugPages.RECOVERY}`}

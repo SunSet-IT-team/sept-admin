@@ -2,14 +2,46 @@ import React, {useState} from 'react';
 import {Box, Typography, TextField, Button} from '@mui/material';
 import PasswordField from '../../shared/ui/inputs/PasswordField';
 import {useStyles} from './styles';
+import {userApi} from '../../entities/user/api';
+import {toast} from 'react-toastify';
+import {setUser} from '../../entities/user/model/slice';
+import {useAppDispatch} from '../../app/store/hook';
+import {auth} from '../../entities/user/model/auth';
 
 const LoginForm = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const dispatch = useAppDispatch();
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Логин:', email, password);
+
+        if (isLoading) return;
+
+        setIsLoading(true);
+
+        const {data} = await userApi.auth({
+            email,
+            password,
+        });
+
+        setIsLoading(false);
+
+        if (!data.success) {
+            toast.error('Неправильный логин или пароль');
+            return;
+        }
+
+        auth(data.token);
+        dispatch(
+            setUser({
+                id: 1,
+                login: 'admin',
+                email: 'info@mail.ru',
+            })
+        );
     };
 
     const styles = useStyles();
@@ -45,6 +77,7 @@ const LoginForm = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                loading={isLoading}
                 sx={styles.button}
             >
                 Войти

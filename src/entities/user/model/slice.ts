@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {User} from './types';
+import {logout} from './auth';
 
 /**
  * Слайс для хранения данных текущего пользователя
@@ -10,11 +11,7 @@ interface UserSlice {
 }
 
 const initialState: UserSlice = {
-    user: {
-        id: 1,
-        login: 'admin',
-        email: 'info@mail.ru',
-    },
+    user: null,
 };
 
 const userSlice = createSlice({
@@ -26,6 +23,7 @@ const userSlice = createSlice({
         },
         clearUser(state) {
             state.user = null;
+            logout();
         },
     },
 });
