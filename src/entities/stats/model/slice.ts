@@ -4,7 +4,7 @@ import {StatsSlice} from './types';
 import {FetchedStats, fetchStats} from './thunk';
 
 const initialState: StatsSlice = {
-    isLoading: false,
+    isLoading: true,
     orderStats: {
         // Все заявки
         totalOrders: 0,

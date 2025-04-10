@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../app/store/hook';
 import {getStats} from '../../entities/stats/model/selectors';
 import {useEffect} from 'react';
 import {fetchStats} from '../../entities/stats/model/thunk';
+import {RectSkeleton} from '../../shared/ui/skeleton/RectSkeleton';
 
 /**
  * Шаблон вывода информации о статистике
@@ -67,13 +68,17 @@ const InfoList = () => {
                         >
                             {stat.label}
                         </Typography>
-                        <Typography
-                            variant="subtitle1"
-                            sx={styles.valueStyles}
-                            component="p"
-                        >
-                            {stat.value}
-                        </Typography>
+                        {stats.isLoading ? (
+                            <RectSkeleton />
+                        ) : (
+                            <Typography
+                                variant="subtitle1"
+                                sx={styles.valueStyles}
+                                component="p"
+                            >
+                                {stat.value}
+                            </Typography>
+                        )}
                     </Box>
                 </Box>
             ))}
