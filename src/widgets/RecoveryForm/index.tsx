@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Box, Typography, TextField, Button} from '@mui/material';
 import PasswordField from '../../shared/ui/inputs/PasswordField';
 import {useStyles} from './styles';
 import {useForm} from 'react-hook-form';
+import {toast} from 'react-toastify';
+import {userApi} from '../../entities/user/api';
+import {useAppDispatch} from '../../app/store/hook';
 
 type RecoveryFormData = {
     email: string;
@@ -15,6 +18,9 @@ type RecoveryFormData = {
  * Форма восстановления пароля
  */
 const RecoveryForm = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useAppDispatch();
+
     const {
         register,
         handleSubmit,
@@ -22,8 +28,32 @@ const RecoveryForm = () => {
         watch,
     } = useForm<RecoveryFormData>();
 
-    const onSubmit = (data: RecoveryFormData) => {
-        console.log('Данные:', data);
+    const onSubmit = async (formData: RecoveryFormData) => {
+        try {
+            if (isLoading) return;
+
+            setIsLoading(true);
+
+            const {data} = await userApi.recovery({
+                code: formData.code,
+                newPassword: formData.password,
+                confirmPassword: formData.confirmPassword,
+            });
+
+            console.log(data);
+
+            setIsLoading(false);
+
+            if (!data.success) {
+                toast.error('Неправильный логин или пароль');
+                return;
+            }
+        } catch (e: any) {
+            console.log(e);
+
+            setIsLoading(false);
+            toast.error('Ошибка сервера');
+        }
     };
 
     const styles = useStyles();
@@ -75,8 +105,8 @@ const RecoveryForm = () => {
                 {...register('password', {
                     required: 'Введите пароль',
                     minLength: {
-                        value: 6,
-                        message: 'Минимум 6 символов',
+                        value: 8,
+                        message: 'Минимум 8 символов',
                     },
                 })}
             />
@@ -96,6 +126,7 @@ const RecoveryForm = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                loading={isLoading}
                 sx={styles.button}
             >
                 Войти

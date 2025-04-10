@@ -16,6 +16,13 @@ export interface UserApiMethods {
      * Получить информацию о себе
      */
     getMe: () => AxiosPromise<void>;
+
+    /**
+     * Сбросить пароль
+     */
+    recovery: (
+        param: UserApiRecoveryParams
+    ) => AxiosPromise<ServerAns<{token: string}>>;
 }
 
 /**
@@ -24,4 +31,13 @@ export interface UserApiMethods {
 export type UserApiAuthParams = {
     email: string;
     password: string;
+};
+
+/**
+ * Параметры для сброса пароля
+ */
+export type UserApiRecoveryParams = {
+    code: string;
+    newPassword: string;
+    confirmPassword: string;
 };
