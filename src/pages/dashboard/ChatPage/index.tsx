@@ -1,8 +1,10 @@
+import ChatsTable from '../../../widgets/dashboard/ChatsTable/ui';
+
 /**
  * Страница чата
  */
 const ChatPage = () => {
-    return <p>Страница чата</p>;
+    return <ChatsTable />;
 };
 
 export default ChatPage;

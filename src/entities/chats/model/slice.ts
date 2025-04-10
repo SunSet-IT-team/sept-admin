@@ -3,9 +3,16 @@ import {fetchChats} from './thunk';
 import {ChatSlice} from './types';
 
 import {Sort} from '../../../shared/types/share';
+import {placeholderExecutor} from '../../executors/model/slice';
 
 const initialState: ChatSlice = {
-    chats: [],
+    chats: [
+        {
+            id: 1,
+            interlocutor: placeholderExecutor,
+            messages: [],
+        },
+    ],
 
     pagination: {
         isLoading: false,
