@@ -61,8 +61,12 @@ export const useServiceTableHandles = () => {
 
         if (changedType !== 'priority') return newRow;
 
+        const newPriority = Number.isNaN(Number(newRow.priority))
+            ? 0
+            : Number(newRow.priority);
+
         dispatch(
-            changeServiceAndRefresh({id: newRow.id, priority: newRow.priority})
+            changeServiceAndRefresh({id: newRow.id, priority: newPriority})
         );
 
         return newRow; // обязательно вернуть новую строку

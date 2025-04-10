@@ -72,7 +72,7 @@ export const addServiceAndRefresh = createAsyncThunk<
                 setTimeout(() => resolve([]), 2000);
             });
 
-            // await ServiceApi.create(data);
+            await ServiceApi.create(data);
 
             dispatch(fetchServices());
         } catch (error: any) {
@@ -99,7 +99,7 @@ export const deleteServiceAndRefresh = createAsyncThunk<
                 setTimeout(() => resolve([]), 2000);
             });
 
-            // await ServiceApi.delete(id);
+            await ServiceApi.delete(id);
 
             dispatch(fetchServices());
         } catch (error: any) {
@@ -131,7 +131,7 @@ export const changeServiceAndRefresh = createAsyncThunk<
                 setTimeout(() => resolve([]), 2000);
             });
 
-            // await ServiceApi.changePriority(data.id, data);
+            await ServiceApi.changePriority(data.id, data);
 
             dispatch(fetchServices());
         } catch (error: any) {

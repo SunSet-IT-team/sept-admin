@@ -30,12 +30,14 @@ export const AppRouter = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        if (isinited) return;
+
         const fetching = dispatch(fetchAdminData());
 
         return () => {
             fetching.abort();
         };
-    }, []);
+    }, [isinited]);
 
     const isAuthenticated = user && isinited && !isLoading;
 

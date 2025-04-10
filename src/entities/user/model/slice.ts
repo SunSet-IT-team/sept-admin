@@ -13,10 +13,15 @@ interface UserSlice {
     isLoading: boolean;
 }
 
+const cachedUser = localStorage.getItem('token')
+    ? JSON.parse(localStorage.getItem('cachedUser') ?? '""')
+    : null;
+
 const initialState: UserSlice = {
-    user: null,
-    isInited: false,
-    isLoading: true,
+    user: cachedUser,
+    isInited: cachedUser ? true : false,
+
+    isLoading: cachedUser ? false : true,
 };
 
 const userSlice = createSlice({
@@ -41,6 +46,12 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 state.isInited = true;
                 state.isLoading = false;
+
+                // Кеширование
+                localStorage.setItem(
+                    'cachedUser',
+                    JSON.stringify(action.payload)
+                );
             }
         );
 

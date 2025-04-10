@@ -7,6 +7,7 @@ import {
 } from './thunk';
 import {ServiceSlice} from './types';
 import {Sort} from '../../../shared/types/share';
+import {toast} from 'react-toastify';
 
 /**
  * Слайс для хранения данных об услугах
@@ -66,6 +67,12 @@ const serviceSlice = createSlice({
                 state.sort = action.payload.sort;
 
             state.pagination.isLoading = false;
+            state.services = action.payload.services;
+        });
+
+        builder.addCase(fetchServices.rejected, (state) => {
+            state.pagination.isLoading = false;
+            toast.error('Ошибка сервера');
         });
 
         /**
@@ -74,6 +81,10 @@ const serviceSlice = createSlice({
         builder.addCase(addServiceAndRefresh.pending, (state) => {
             state.pagination.isLoading = true;
         });
+        builder.addCase(addServiceAndRefresh.rejected, (state) => {
+            state.pagination.isLoading = false;
+            toast.error('Ошибка сервера');
+        });
 
         /**
          * deleteServiceAndRefresh
@@ -81,12 +92,20 @@ const serviceSlice = createSlice({
         builder.addCase(deleteServiceAndRefresh.pending, (state) => {
             state.pagination.isLoading = true;
         });
+        builder.addCase(deleteServiceAndRefresh.rejected, (state) => {
+            state.pagination.isLoading = false;
+            toast.error('Ошибка сервера');
+        });
 
         /**
          * changeServiceAndRefresh
          */
         builder.addCase(changeServiceAndRefresh.pending, (state) => {
             state.pagination.isLoading = true;
+        });
+        builder.addCase(changeServiceAndRefresh.rejected, (state) => {
+            state.pagination.isLoading = false;
+            toast.error('Ошибка сервера');
         });
     },
 });
