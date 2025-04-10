@@ -12,13 +12,7 @@ import {Sort} from '../../../shared/types/share';
  * Слайс для хранения данных об услугах
  */
 const initialState: ServiceSlice = {
-    services: [
-        {id: 1, name: 'Диагностика', priority: 100},
-        {id: 2, name: 'Замена экрана', priority: 100},
-        {id: 3, name: 'Замена батареи', priority: 100},
-        {id: 4, name: 'Чистка от пыли', priority: 100},
-        {id: 5, name: 'Установка ПО', priority: 100},
-    ],
+    services: [],
 
     pagination: {
         isLoading: false,

@@ -4,9 +4,9 @@ import PasswordField from '../../shared/ui/inputs/PasswordField';
 import {useStyles} from './styles';
 import {userApi} from '../../entities/user/api';
 import {toast} from 'react-toastify';
-import {setUser} from '../../entities/user/model/slice';
 import {useAppDispatch} from '../../app/store/hook';
 import {auth} from '../../entities/user/model/auth';
+import {fetchAdminData} from '../../entities/user/model/thunk';
 
 const LoginForm = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -35,13 +35,7 @@ const LoginForm = () => {
         }
 
         auth(data.token);
-        dispatch(
-            setUser({
-                id: 1,
-                login: 'admin',
-                email: 'info@mail.ru',
-            })
-        );
+        dispatch(fetchAdminData());
     };
 
     const styles = useStyles();

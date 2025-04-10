@@ -11,13 +11,40 @@ import ChatsPage from '../../pages/dashboard/ChatsPage';
 import {SlugPages} from './pages';
 import {AuthLayout} from '../../pages/layouts/AuthLayout';
 import ChatPage from '../../pages/ChatPage';
-import {useAppSelector} from '../store/hook';
-import {getCurrentUser} from '../../entities/user/model/selectors';
+import {useAppDispatch, useAppSelector} from '../store/hook';
+import {
+    getCurrentUser,
+    getIsinited,
+    getIsUserLoading,
+} from '../../entities/user/model/selectors';
+import {useEffect} from 'react';
+import {fetchAdminData} from '../../entities/user/model/thunk';
+import LoadPage from '../../pages/LoadPage';
 
 export const AppRouter = () => {
     const user = useAppSelector(getCurrentUser);
+    const isinited = useAppSelector(getIsinited);
+    const isLoading = useAppSelector(getIsUserLoading);
+    const token = localStorage.getItem('token');
 
-    const isAuthenticated = user !== null;
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const fetching = dispatch(fetchAdminData());
+
+        return () => {
+            fetching.abort();
+        };
+    }, []);
+
+    const isAuthenticated = user && isinited && !isLoading;
+
+    if (!isinited && token)
+        return (
+            <Routes>
+                <Route index element={<LoadPage />} />
+            </Routes>
+        );
 
     return (
         <Routes>

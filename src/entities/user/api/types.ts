@@ -1,5 +1,6 @@
 import {AxiosPromise} from 'axios';
 import {ServerAns} from '../../../shared/types/share';
+import {AdminDto, AuthDTO} from './dto';
 
 /**
  * Интерфейс для API статистики
@@ -8,14 +9,12 @@ export interface UserApiMethods {
     /**
      * Авторизоваться
      */
-    auth: (
-        param: UserApiAuthParams
-    ) => AxiosPromise<ServerAns<{token: string}>>;
+    auth: (param: UserApiAuthParams) => AxiosPromise<ServerAns<AuthDTO>>;
 
     /**
      * Получить информацию о себе
      */
-    getMe: () => AxiosPromise<void>;
+    getMe: () => AxiosPromise<AdminDto>;
 
     /**
      * Сбросить пароль

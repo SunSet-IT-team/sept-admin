@@ -40,19 +40,9 @@ export const fetchServices = createAsyncThunk<
         // Добавляем сортировку
         if (state.sort) params.sort = state.sort;
 
-        // const response = await ServiceApi.getAll();
-        // Заглушка
-        const response: Service[] = await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
+        const {data} = await ServiceApi.getAll();
 
-        // const services: Service[] = response.data.map((el) => ({
-        //     name: el.name,
-        //     id: el.id,
-        //     priority: el.priority,
-        // }));
-
-        res.services = response;
+        res.services = data;
 
         return res;
     } catch (error: any) {
