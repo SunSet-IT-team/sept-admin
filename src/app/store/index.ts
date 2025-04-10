@@ -5,6 +5,7 @@ import {ordersReducer} from '../../entities/orders/model/slice';
 import {executorsReducer} from '../../entities/executors/model/slice';
 import {customersReducer} from '../../entities/customers/model/slice';
 import {statsReducer} from '../../entities/stats/model/slice';
+import {chatsReducer} from '../../entities/chats/model/slice';
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         executors: executorsReducer,
         customers: customersReducer,
         stats: statsReducer,
+        chats: chatsReducer,
     },
 });
 
