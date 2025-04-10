@@ -11,6 +11,7 @@ interface UserSlice {
 
 const initialState: UserSlice = {
     user: {
+        id: 1,
         login: 'admin',
         email: 'info@mail.ru',
     },

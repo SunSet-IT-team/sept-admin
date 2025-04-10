@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchChats} from './thunk';
-import {ChatSlice} from './types';
+import {ChatSlice, Message} from './types';
 
 import {Sort} from '../../../shared/types/share';
 import {placeholderExecutor} from '../../executors/model/slice';
@@ -10,7 +10,41 @@ const initialState: ChatSlice = {
         {
             id: 1,
             interlocutor: placeholderExecutor,
-            messages: [],
+            messages: [
+                {
+                    id: 1,
+                    chatId: 1,
+                    content: 'Привет холодный мир',
+                    senderId: 1,
+                    createdAt: '10:10',
+                    readed: true,
+                },
+                {
+                    id: 2,
+                    chatId: 1,
+                    content:
+                        'Добрый день, хочу уточнить детали: как будет проводиться сборка',
+                    senderId: 1,
+                    createdAt: '10:10',
+                    readed: true,
+                },
+                {
+                    id: 3,
+                    chatId: 1,
+                    content: 'Добрый, да, конечно, сейчас расскажем',
+                    senderId: 2,
+                    createdAt: '10:10',
+                    readed: true,
+                },
+                {
+                    id: 4,
+                    chatId: 1,
+                    content: 'Спасибо!',
+                    senderId: 1,
+                    createdAt: '10:10',
+                    readed: false,
+                },
+            ],
         },
     ],
 
@@ -46,6 +80,32 @@ const chatSlice = createSlice({
             state.pagination.currentPage = 0;
             state.sort = action.payload.sort;
         },
+
+        /**
+         * Подтверждение отправки сообщения
+         */
+        sendedMessage(
+            state,
+            action: PayloadAction<{timeId: String; message: Message}>
+        ) {
+            const message = action.payload.message;
+            const timeId = action.payload.timeId;
+            const chat = state.chats.find((c) => c.id === message.chatId);
+            if (chat) {
+                chat.messages = chat.messages.filter((m) => m.id != timeId);
+                chat.messages.push(message);
+            }
+        },
+
+        /**
+         * Пришло сообщение
+         */
+        receivedMessage(state, action: PayloadAction<Message>) {
+            const message = action.payload;
+            const chat = state.chats.find((c) => c.id === message.chatId);
+
+            if (chat) chat.messages.push(message);
+        },
     },
     extraReducers: (builder) => {
         /**
@@ -60,6 +120,11 @@ const chatSlice = createSlice({
     },
 });
 
-export const {setChatsPagination, setChatsSort} = chatSlice.actions;
+export const {
+    setChatsPagination,
+    setChatsSort,
+    sendedMessage,
+    receivedMessage,
+} = chatSlice.actions;
 
 export const chatsReducer = chatSlice.reducer;

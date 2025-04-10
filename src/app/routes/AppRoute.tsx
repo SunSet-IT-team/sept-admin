@@ -7,9 +7,10 @@ import CustomersPage from '../../pages/dashboard/CustomersPage';
 import ExecutorsPage from '../../pages/dashboard/ExecutorsPage';
 import StatsPage from '../../pages/dashboard/StatsPage';
 import ServicesPage from '../../pages/dashboard/ServicesPage';
-import ChatPage from '../../pages/dashboard/ChatPage';
+import ChatsPage from '../../pages/dashboard/ChatsPage';
 import {SlugPages} from './pages';
 import {AuthLayout} from '../../pages/layouts/AuthLayout';
+import ChatPage from '../../pages/ChatPage';
 
 export const AppRouter = () => {
     const isAuthenticated = true;
@@ -42,7 +43,11 @@ export const AppRouter = () => {
                 <Route path={SlugPages.CUSTOMERS} element={<CustomersPage />} />
                 <Route path={SlugPages.EXECUTORS} element={<ExecutorsPage />} />
                 <Route path={SlugPages.STATS} element={<StatsPage />} />
-                <Route path={SlugPages.CHAT} element={<ChatPage />} />
+                <Route path={SlugPages.CHAT} element={<ChatsPage />} />
+                <Route
+                    path={`${SlugPages.CHAT}/:chatId`}
+                    element={<ChatPage />}
+                />
             </Route>
 
             {/* Резервный маршрут (404 или редирект) */}

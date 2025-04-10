@@ -12,7 +12,7 @@ export const appTheme = createTheme({
         primary: {
             main: '#4D4D4D',
             dark: '#1565c0',
-            light: '#42a5f5',
+            light: '#D9D9D9',
         },
         text: {
             black: '#000000',

@@ -18,15 +18,19 @@ export interface ChatSlice {
 export type Chat = WithId & {
     messages: Message[];
     interlocutor: Executor | Customer;
+    additionalInfo?: string;
 };
 
 /**
  * Сообщение
  */
-export type Message = WithId & {
+export type Message = {
+    id: number | string;
     chatId: number;
     content?: string;
     fileUrl?: string;
     senderId: number;
+    readed: boolean;
     createdAt: string;
+    isLoading?: boolean;
 };
