@@ -56,6 +56,8 @@ const serviceSlice = createSlice({
             state.pagination.isLoading = true;
         });
         builder.addCase(fetchServices.fulfilled, (state, action) => {
+            console.log(action.payload);
+
             // Ставим пагинацию
             state.pagination = {
                 ...state.pagination,

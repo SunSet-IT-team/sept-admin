@@ -10,13 +10,12 @@ import {
  * API для взаимодействия с услугами
  */
 export const ServiceApi: ServiceApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/services`),
+    getAll: () => api.get<GetAllDto>(`/service`),
 
-    create: (data: ServiceApiCreateParams) =>
-        api.post(`/services/create`, data),
+    create: (data: ServiceApiCreateParams) => api.post(`/service`, data),
 
-    delete: (id: number) => api.delete(`/services/${id}`),
+    delete: (id: number) => api.delete(`/service/${id}`),
 
     changePriority: (id: number, data: ServiceApiChangePriorityParams) =>
-        api.patch(`/services/${id}/priority`, data),
+        api.patch(`/service/${id}`, data),
 };

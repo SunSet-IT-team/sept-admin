@@ -2,6 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {ServiceApi} from '../api';
 import {Service} from './types';
 import {AppThunkParams, Sort} from '../../../shared/types/share';
+import {mapServerService} from '../api/mapping';
 
 export type FetchedServices = {
     services: Service[];
@@ -42,7 +43,7 @@ export const fetchServices = createAsyncThunk<
 
         const {data} = await ServiceApi.getAll();
 
-        res.services = data;
+        res.services = data.data.items.map((el) => mapServerService(el));
 
         return res;
     } catch (error: any) {
