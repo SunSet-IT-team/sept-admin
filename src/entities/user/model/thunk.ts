@@ -22,8 +22,8 @@ export const fetchAdminData = createAsyncThunk<
         if (data.error) return null;
 
         const adminData: User = {
-            id: data.id,
-            email: data.email,
+            id: data.data.id,
+            email: data.data.email,
             login: 'admin',
         };
 

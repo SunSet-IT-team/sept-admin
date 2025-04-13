@@ -10,7 +10,6 @@ export type AdminDto = ServerAns<{
     status: string;
     createdAt: string;
     updatedAt: string;
-    success: boolean;
 }>;
 
 /**

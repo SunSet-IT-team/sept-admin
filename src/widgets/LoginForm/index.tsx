@@ -34,7 +34,7 @@ const LoginForm = () => {
             return;
         }
 
-        auth(data.token);
+        auth(data.data.token);
         dispatch(fetchAdminData());
     };
 

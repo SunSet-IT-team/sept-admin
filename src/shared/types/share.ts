@@ -80,7 +80,8 @@ export type Filter = {
 /**
  * Ответ сервера
  */
-export type ServerAns<T> = T & {
+export type ServerAns<T> = {
+    data: T;
     success: boolean;
     error?: string;
 };

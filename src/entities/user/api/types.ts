@@ -9,7 +9,7 @@ export interface UserApiMethods {
     /**
      * Авторизоваться
      */
-    auth: (param: UserApiAuthParams) => AxiosPromise<ServerAns<AuthDTO>>;
+    auth: (param: UserApiAuthParams) => AxiosPromise<AuthDTO>;
 
     /**
      * Получить информацию о себе
