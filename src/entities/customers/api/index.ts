@@ -6,7 +6,8 @@ import {CustomersApiChangePriorityParams, CustomersApiMethods} from './types';
  * API для взаимодействия с заказчиками
  */
 export const CustomerApi: CustomersApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/customer/list?status=VERIFIED&limit=-1`), // Хардкод но как иначе
+    getAll: () =>
+        api.get<GetAllDto>(`/customer/list?status=VERIFIED&limit=1000`), // Хардкод но как иначе
 
     delete: (id: number) => api.delete(`/customer/${id}`),
 

@@ -6,7 +6,7 @@ import {ExecutorsApiChangePriorityParams, ExecutorsApiMethods} from './types';
  * API для взаимодействия с исполнителями
  */
 export const ExecutorApi: ExecutorsApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/executor`),
+    getAll: () => api.get<GetAllDto>(`/executor&limit=1000`),
 
     delete: (id: number) => api.delete(`/executor/${id}`),
 

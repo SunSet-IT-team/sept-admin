@@ -12,23 +12,32 @@ export type GetAllDto = ServerAns<{
     pages: number;
 }>;
 
+/**
+ * Покупатель
+ */
 export type CustomerDTO = {
-    userId: string;
-    user: {
-        email: string;
-        firstName: string;
-        lastName: string | null;
-        phone: string;
-        status: string;
-    };
-    addresses: AddressDTO[];
+    email: string;
+    name: string;
+    id: number;
+    profile: ProfileDTO;
+    role: 'CUSTOMER';
 };
 
+/**
+ * Профиль
+ */
+export type ProfileDTO = {
+    addresses: AddressDTO[];
+    ordersCount: number;
+    phone: string;
+    priority: number;
+    profilePhoto: string | null;
+};
+
+/**
+ * Адресс
+ */
 export type AddressDTO = {
-    city: null | string;
-    coordinates: null | string;
-    id: string;
-    isDefault: boolean;
-    postalCode: null | string;
+    id: number;
     value: string;
 };
