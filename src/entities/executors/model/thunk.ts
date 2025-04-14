@@ -1,6 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {Executor} from './types';
+import {ExecutorApi} from '../api';
+import {mapExecutorDTO} from '../api/mapping';
 
 export type FetchedExecutors = {
     executors: Executor[];
@@ -24,19 +26,9 @@ export const fetchExecutors = createAsyncThunk<
         // Массив параметров для запроса
         const params: any = {};
 
-        // const response = await ExecutorApi.getAll();
-        // const services: Service[] = response.data.map((el) => ({
-        //     name: el.name,
-        //     id: el.id,
-        //     priority: el.priority,
-        // }));
+        const {data} = await ExecutorApi.getAll();
 
-        // Заглушка
-        const response: Executor[] = await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
-
-        res.executors = response;
+        res.executors = data.data.items.map((el) => mapExecutorDTO(el));
 
         return res;
     } catch (error: any) {

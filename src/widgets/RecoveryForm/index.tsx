@@ -40,8 +40,6 @@ const RecoveryForm = () => {
                 confirmPassword: formData.confirmPassword,
             });
 
-            console.log(data);
-
             setIsLoading(false);
 
             if (!data.success) {

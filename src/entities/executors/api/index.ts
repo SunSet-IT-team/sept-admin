@@ -5,11 +5,11 @@ import {ExecutorsApiChangePriorityParams, ExecutorsApiMethods} from './types';
 /**
  * API для взаимодействия с исполнителями
  */
-export const ServiceApi: ExecutorsApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/executors`),
+export const ExecutorApi: ExecutorsApiMethods = {
+    getAll: () => api.get<GetAllDto>(`/executor`),
 
-    delete: (id: number) => api.delete(`/executors/${id}`),
+    delete: (id: number) => api.delete(`/executor/${id}`),
 
     changePriority: (id: number, data: ExecutorsApiChangePriorityParams) =>
-        api.patch(`/executors/${id}`, data),
+        api.patch(`/executor/${id}`, data),
 };

@@ -13,9 +13,11 @@ interface UserSlice {
     isLoading: boolean;
 }
 
-const cachedUser = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('cachedUser') ?? '""')
-    : null;
+// const cachedUser = localStorage.getItem('token')
+//     ? JSON.parse(localStorage.getItem('cachedUser') ?? '""')
+//     : null;
+
+const cachedUser = null;
 
 const initialState: UserSlice = {
     user: cachedUser,

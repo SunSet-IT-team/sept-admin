@@ -42,12 +42,18 @@ export type Executor = WithPriority &
  * Формы оказания услуг
  */
 export enum ExecutorServiceType {
-    // ИП
-    SOLE = 'SOLE',
+    /**
+     * Физ лицо
+     */
+    INDIVIDUAL = 'INDIVIDUAL',
 
-    // Юридическое лицо
+    /**
+     * ООО
+     */
     LEGAL_ENTITY = 'LEGAL_ENTITY',
 
-    // Частник
-    PRIVATE_PERSON = 'PRIVATE_PERSON',
+    /**
+     * ИП
+     */
+    SOLE_PROPRIETOR = 'SOLE_PROPRIETOR',
 }

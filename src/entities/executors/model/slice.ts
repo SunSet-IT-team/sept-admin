@@ -8,7 +8,7 @@ import {ExecutorsSlice} from './types';
 import {Executor, ExecutorServiceType} from '../../executors/model/types';
 
 export const placeholderExecutor: Executor = {
-    id: 1,
+    id: '1',
     priority: 100,
     name: 'ООО септики',
     email: 'test@mail.ru',
@@ -47,6 +47,7 @@ const executorsSlice = createSlice({
         });
         builder.addCase(fetchExecutors.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.executors = action.payload.executors;
         });
 
         /**
