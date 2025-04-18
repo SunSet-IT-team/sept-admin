@@ -5,14 +5,14 @@ import {AddressDTO, CustomerDTO} from './dto';
  * Перевод DTO в нормальный вид
  * для заказчиков
  */
-export const mapServerCustomer = (customer: CustomerDTO): Customer => {
+export const mapCustomerDTO = (customer: CustomerDTO): Customer => {
     return {
         id: `${customer.id}`,
         name: customer.name,
         email: customer.email,
         phone: customer.profile.phone,
         profileImage: customer.profile.profilePhoto || '',
-        addresses: customer.profile.addresses.map((el) => mapServerAddress(el)),
+        addresses: customer.profile.addresses.map((el) => mapAddressDTO(el)),
         orderQty: customer.ordersCount,
         priority: customer.profile.priority,
     };
@@ -22,7 +22,7 @@ export const mapServerCustomer = (customer: CustomerDTO): Customer => {
  * Перевод DTO в нормальный вид
  * для адресов
  */
-export const mapServerAddress = (address: AddressDTO): Address => {
+export const mapAddressDTO = (address: AddressDTO): Address => {
     return {
         id: `${address.id}`,
         address: address.value,

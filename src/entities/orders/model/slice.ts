@@ -92,6 +92,8 @@ const orderSlice = createSlice({
         });
         builder.addCase(fetchOrders.fulfilled, (state, action) => {
             state.pagination.isLoading = false;
+            state.pagination.total = action.payload.total;
+            state.orders = action.payload.orders;
         });
 
         /**

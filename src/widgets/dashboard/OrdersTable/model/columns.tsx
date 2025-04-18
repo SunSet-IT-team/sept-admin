@@ -25,29 +25,29 @@ export const getOrdersTableColumns = (
             field: 'customer',
             headerName: 'Заказчик',
             flex: 1,
-            valueGetter: (_, row) => row.customer.name,
+            valueGetter: (_, row) =>
+                row.customer?.name || 'Заказчик отсутствует',
         },
         {
             field: 'date',
             headerName: 'Дата',
             flex: 1,
             valueGetter: (_, row) => {
-                return row.detailes?.openDate
-                    ? formatDateToDMY(row.detailes?.openDate)
-                    : 'Даты нет';
+                return row.date;
             },
         },
         {
             field: 'service',
             headerName: 'Услуга',
             flex: 1,
-            valueGetter: (_, row) => row.service.name,
+            valueGetter: (_, row) => row.service?.name || 'Услуга отсутствует',
         },
         {
             field: 'executor',
             headerName: 'Исполнитель',
             flex: 1,
-            valueGetter: (_, row) => row.customer.name,
+            valueGetter: (_, row) =>
+                row.executor?.name || 'Исполнитель отсутствует',
         },
         {
             field: 'priority',

@@ -56,8 +56,6 @@ const serviceSlice = createSlice({
             state.pagination.isLoading = true;
         });
         builder.addCase(fetchServices.fulfilled, (state, action) => {
-            console.log(action.payload);
-
             // Ставим пагинацию
             state.pagination = {
                 ...state.pagination,
@@ -74,7 +72,6 @@ const serviceSlice = createSlice({
 
         builder.addCase(fetchServices.rejected, (state) => {
             state.pagination.isLoading = false;
-            toast.error('Ошибка сервера');
         });
 
         /**
@@ -85,7 +82,6 @@ const serviceSlice = createSlice({
         });
         builder.addCase(addServiceAndRefresh.rejected, (state) => {
             state.pagination.isLoading = false;
-            toast.error('Ошибка сервера');
         });
 
         /**
@@ -96,7 +92,6 @@ const serviceSlice = createSlice({
         });
         builder.addCase(deleteServiceAndRefresh.rejected, (state) => {
             state.pagination.isLoading = false;
-            toast.error('Ошибка сервера');
         });
 
         /**
@@ -107,7 +102,6 @@ const serviceSlice = createSlice({
         });
         builder.addCase(changeServiceAndRefresh.rejected, (state) => {
             state.pagination.isLoading = false;
-            toast.error('Ошибка сервера');
         });
     },
 });

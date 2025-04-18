@@ -9,7 +9,7 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
     return {
         id: `${dto.id}`,
         email: dto.email,
-        phone: dto.profile.phone,
+        phone: dto.profile.phone || '',
         name: dto.profile.companyName,
         priority: dto.profile.priority,
         profileImage: dto.profile.profilePhoto

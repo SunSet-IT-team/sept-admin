@@ -2,6 +2,9 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {Order} from './types';
 import {OrderApi} from '../api';
+import {mapOrderDTO} from '../api/mapping';
+import {toast} from 'react-toastify';
+import {OrdersApiGetAllParams} from '../api/types';
 
 export type FetchedOrders = {
     orders: Order[];
@@ -23,37 +26,37 @@ export const fetchOrders = createAsyncThunk<
         };
 
         // Массив параметров для запроса
-        const params: any = {};
+        const params: OrdersApiGetAllParams = {};
 
         const state = getState().orders;
 
         // Добавляем параметры пагинации
         if (state.pagination.currentPage)
             params.page = state.pagination.currentPage;
-        if (state.pagination.perPage) params.perPage = state.pagination.perPage;
+        if (state.pagination.perPage) params.limit = state.pagination.perPage;
 
         // Добавляем сортировку
-        if (state.sort) params.sort = state.sort;
+        if (state.sort) {
+            params.order = state.sort.sort;
+            params.sortBy = state.sort.field;
+        }
 
-        const log = await OrderApi.getAll();
+        if (state.filters) {
+            state.filters.forEach((filter) => {
+                //@ts-ignore
+                params[filter.name as keyof Required<OrdersApiGetAllParams>] =
+                    filter.value;
+            });
+        }
 
-        console.log(log);
+        const {data} = await OrderApi.getAll(params);
 
-        // const services: Service[] = response.data.map((el) => ({
-        //     name: el.name,
-        //     id: el.id,
-        //     priority: el.priority,
-        // }));
-
-        // Заглушка
-        const response: Order[] = await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
-
-        res.orders = response;
-
+        res.orders = data.data.items.map((el) => mapOrderDTO(el));
+        res.total = data.data.total;
         return res;
     } catch (error: any) {
+        console.log(error);
+
         return rejectWithValue(error.response?.data?.message || 'Ошибка');
     }
 });
@@ -67,12 +70,7 @@ export const deleteOrderAndRefresh = createAsyncThunk<
     AppThunkParams
 >('orders/deleteOrderAndRefresh', async (id, {dispatch, rejectWithValue}) => {
     try {
-        // Заглушка
-        await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
-
-        // await ServiceApi.delete(id);
+        await OrderApi.delete(id);
 
         dispatch(fetchOrders());
     } catch (error: any) {
@@ -94,15 +92,13 @@ export const changeOrderAndRefresh = createAsyncThunk<
     AppThunkParams
 >('orders/changeOrderAndRefresh', async (data, {dispatch, rejectWithValue}) => {
     try {
-        // Заглушка
-        await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
+        await OrderApi.changePriority(data.id, {
+            priority: Number(data.priority),
         });
-
-        // await ServiceApi.changePriority(data.id, data);
 
         dispatch(fetchOrders());
     } catch (error: any) {
+        toast.error(error.response?.data?.message || 'Ошибка');
         return rejectWithValue(error.response?.data?.message || 'Ошибка');
     }
 });

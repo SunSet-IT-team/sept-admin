@@ -1,6 +1,7 @@
 import {Theme} from '@emotion/react';
 import {SxProps} from '@mui/material';
 import {AppDispatch, RootState} from '../../app/store';
+import {OrdersApiGetAllParams} from '../../entities/orders/api/types';
 
 /**
  * Id
@@ -73,7 +74,7 @@ export type AppThunkParams = {
  * Фильтр
  */
 export type Filter = {
-    name: string;
+    name: keyof OrdersApiGetAllParams;
     value: string | number;
 };
 

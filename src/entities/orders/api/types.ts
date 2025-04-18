@@ -1,5 +1,6 @@
 import {AxiosPromise} from 'axios';
 import {GetAllDto} from './dto';
+import {OrderStatus} from '../model/types';
 
 /**
  * Интерфейс для API услуг
@@ -8,7 +9,7 @@ export interface OrdersApiMethods {
     /**
      * Получить все услуги
      */
-    getAll: () => AxiosPromise<GetAllDto>;
+    getAll: (params?: OrdersApiGetAllParams) => AxiosPromise<GetAllDto>;
 
     /**
      * Удалить услугу
@@ -23,6 +24,16 @@ export interface OrdersApiMethods {
         data: OrdersApiChangePriorityParams
     ) => AxiosPromise;
 }
+
+export type OrdersApiGetAllParams = {
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    order?: 'asc' | 'desc';
+    status?: OrderStatus;
+    executorId?: number;
+    customerId?: number;
+};
 
 export type OrdersApiChangePriorityParams = {
     priority: number;

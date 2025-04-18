@@ -55,8 +55,6 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
         f();
     }, [executor?.id]);
 
-    console.log(executor);
-
     if (!executor) return;
 
     const handleClickDelete = () => {

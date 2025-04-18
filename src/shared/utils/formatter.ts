@@ -23,13 +23,13 @@ export const formatDateToDMY = (date: Date | number) => {
  */
 export const mapOrderStatus = (status: OrderStatus) => {
     switch (status) {
-        case OrderStatus.WAITING:
+        case OrderStatus.PENDING:
             return 'В ожидании';
-        case OrderStatus.PROCESS:
+        case OrderStatus.IN_PROGRESS:
             return 'В работе';
-        case OrderStatus.CANCELED:
+        case OrderStatus.REJECTED:
             return 'Отменён';
-        case OrderStatus.DONE:
+        case OrderStatus.COMPLETED:
             return 'Завершён';
         default:
             const neverCheck: never = status;

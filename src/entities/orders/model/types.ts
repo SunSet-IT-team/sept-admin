@@ -19,24 +19,32 @@ export interface OrderSlice {
  */
 export type Order = WithPriority &
     WithId & {
-        customer: Customer;
+        address: string;
+        customer: Customer | null;
+        comment: string;
+        payment: string;
         date: string;
-        service: Service;
-        executor: Executor;
+        service: Service | null;
+        executor: Executor | null;
         status: OrderStatus;
         city: string;
         detailes?: OrderDetailes;
-        review?: Review;
+        review: Review | null;
+        report: ExecutorReport | null;
+        septicVolume: string;
+        septicDepth: string;
+        septicDistance: string;
+        object: string;
     };
 
 /**
  * Статусы заказа
  */
 export enum OrderStatus {
-    WAITING = 'WAITING',
-    PROCESS = 'PROCESS',
-    CANCELED = 'CANCELED',
-    DONE = 'DONE',
+    PENDING = 'PENDING',
+    IN_PROGRESS = 'IN_PROGRESS',
+    REJECTED = 'REJECTED',
+    COMPLETED = 'COMPLETED',
 }
 
 /**
@@ -54,7 +62,17 @@ export type OrderDetailes = {
  * Отзыв
  */
 export type Review = {
-    customerId: number;
-    rate: 1 | 2 | 3 | 4 | 5;
+    author: Customer;
+    id: number | string;
+    rating: number;
     text: string;
+};
+
+/**
+ * Отчёт
+ */
+export type ExecutorReport = {
+    id: number | string;
+    files: string[];
+    total: number;
 };

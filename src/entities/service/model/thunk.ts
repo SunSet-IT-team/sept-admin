@@ -3,6 +3,7 @@ import {ServiceApi} from '../api';
 import {Service} from './types';
 import {AppThunkParams, Sort} from '../../../shared/types/share';
 import {mapServerService} from '../api/mapping';
+import {toast} from 'react-toastify';
 
 export type FetchedServices = {
     services: Service[];
@@ -68,11 +69,6 @@ export const addServiceAndRefresh = createAsyncThunk<
     'services/addServiceAndRefresh',
     async (data, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
-
             await ServiceApi.create(data);
 
             dispatch(fetchServices());
@@ -95,11 +91,6 @@ export const deleteServiceAndRefresh = createAsyncThunk<
     'services/deleteServiceAndRefresh',
     async (id, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
-
             await ServiceApi.delete(id);
 
             dispatch(fetchServices());
@@ -127,18 +118,14 @@ export const changeServiceAndRefresh = createAsyncThunk<
     'services/changeServiceAndRefresh',
     async (data, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
+            await ServiceApi.changePriority(data.id, {
+                priority: Number(data.priority),
             });
-
-            await ServiceApi.changePriority(data.id, data);
 
             dispatch(fetchServices());
         } catch (error: any) {
-            return rejectWithValue(
-                error.response?.data?.message || 'Ошибка создания услуги'
-            );
+            toast.error(error.response?.data?.message || 'Ошибка');
+            return rejectWithValue(error.response?.data?.message || 'Ошибка');
         }
     }
 );

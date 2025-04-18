@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {Customer} from './types';
 import {CustomerApi} from '../api';
-import {mapServerCustomer} from '../api/mapping';
+import {mapCustomerDTO} from '../api/mapping';
 
 export type FetchedCustomers = {
     customers: Customer[];
@@ -32,7 +32,7 @@ export const fetchCustomers = createAsyncThunk<
 
         const customers = data.data.items
             .filter((el) => el.profile)
-            .map((el) => mapServerCustomer(el));
+            .map((el) => mapCustomerDTO(el));
 
         res.customers = customers;
 
@@ -80,12 +80,7 @@ export const changeCustomerAndRefresh = createAsyncThunk<
     'customers/changeCustomerAndRefresh',
     async (data, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
-
-            // await ServiceApi.changePriority(data.id, data);
+            await CustomerApi.changePriority(data.id, data);
 
             dispatch(fetchCustomers());
         } catch (error: any) {

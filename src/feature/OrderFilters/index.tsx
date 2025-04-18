@@ -21,6 +21,8 @@ import {getExecutors} from '../../entities/executors/model/selectors';
 import {getCustomers} from '../../entities/customers/model/selectors';
 import {OrderStatus} from '../../entities/orders/model/types';
 import {mapOrderStatus} from '../../shared/utils/formatter';
+import {fetchExecutors} from '../../entities/executors/model/thunk';
+import {fetchCustomers} from '../../entities/customers/model/thunk';
 
 const statuses = Object.values(OrderStatus);
 /**
@@ -44,25 +46,28 @@ export const OrdersFilter = () => {
 
     useEffect(() => {
         const initCustomerId =
-            filters.find((f) => f.name == 'customer')?.value || '';
+            filters.find((f) => f.name == 'customerId')?.value || '';
         const initCxecutorId =
-            filters.find((f) => f.name == 'executor')?.value || '';
+            filters.find((f) => f.name == 'executorId')?.value || '';
         const initStatus = filters.find((f) => f.name == 'status')?.value || '';
 
         setCustomerId(initCustomerId);
         setExecutorId(initCxecutorId);
         setStatus(initStatus);
+
+        dispatch(fetchExecutors());
+        dispatch(fetchCustomers());
     }, []);
 
     const handleApply = () => {
         dispatch(
             setOrdersFilters([
                 {
-                    name: 'customer',
+                    name: 'customerId',
                     value: customerId,
                 },
                 {
-                    name: 'executor',
+                    name: 'executorId',
                     value: executorId,
                 },
                 {
