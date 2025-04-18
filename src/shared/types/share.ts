@@ -6,7 +6,7 @@ import {AppDispatch, RootState} from '../../app/store';
  * Id
  */
 export type WithId = {
-    id: string;
+    id: string | number;
 };
 
 /**

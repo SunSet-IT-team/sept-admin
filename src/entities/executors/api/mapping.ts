@@ -1,3 +1,4 @@
+import {getImagePath} from '../../../shared/utils/share';
 import {Executor} from '../model/types';
 import {ExecutorDTO} from './dto';
 
@@ -11,7 +12,9 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
         phone: dto.profile.phone,
         name: dto.profile.companyName,
         priority: dto.profile.priority,
-        profileImage: dto.profile.profilePhoto || '',
+        profileImage: dto.profile.profilePhoto
+            ? getImagePath(dto.profile.profilePhoto.url)
+            : '',
 
         about: dto.profile.about,
         experience: `${dto.profile.experience}`,
@@ -19,12 +22,16 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
         city: dto.profile.city || 'Москва',
         orderQty: dto.profile.completedOrders,
         docs: {
-            register: '',
-            approve: '',
+            register: dto.profile.registrationDoc
+                ? getImagePath(dto.profile.registrationDoc.url)
+                : '',
+            approve: dto.profile.licenseDoc
+                ? getImagePath(dto.profile.licenseDoc.url)
+                : '',
         },
         rating: {
             value: dto.profile.rating,
-            count: 10,
+            count: dto.reviewsCount,
         },
     };
 };

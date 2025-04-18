@@ -41,18 +41,13 @@ export const fetchExecutors = createAsyncThunk<
  */
 export const deleteExecutorAndRefresh = createAsyncThunk<
     void,
-    number,
+    number | string,
     AppThunkParams
 >(
     'executors/deleteExecutorAndRefresh',
     async (id, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
-            });
-
-            // await ServiceApi.delete(id);
+            await ExecutorApi.delete(`${id}`);
 
             dispatch(fetchExecutors());
         } catch (error: any) {

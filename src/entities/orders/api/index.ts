@@ -5,11 +5,11 @@ import {OrdersApiChangePriorityParams, OrdersApiMethods} from './types';
 /**
  * API для взаимодействия с услугами
  */
-export const ServiceApi: OrdersApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/orders`),
+export const OrderApi: OrdersApiMethods = {
+    getAll: () => api.get<GetAllDto>(`/order`),
 
-    delete: (id: number) => api.delete(`/orders/${id}`),
+    delete: (id: number) => api.delete(`/order/${id}`),
 
     changePriority: (id: number, data: OrdersApiChangePriorityParams) =>
-        api.patch(`/orders/${id}`, data),
+        api.patch(`/order/${id}`, data),
 };

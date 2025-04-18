@@ -30,7 +30,9 @@ export const fetchCustomers = createAsyncThunk<
 
         if (!data.success) return res;
 
-        const customers = data.data.items.map((el) => mapServerCustomer(el));
+        const customers = data.data.items
+            .filter((el) => el.profile)
+            .map((el) => mapServerCustomer(el));
 
         res.customers = customers;
 

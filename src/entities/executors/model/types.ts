@@ -57,3 +57,23 @@ export enum ExecutorServiceType {
      */
     SOLE_PROPRIETOR = 'SOLE_PROPRIETOR',
 }
+
+/**
+ * Статистика
+ */
+export type ExecutorStats = {
+    income: {
+        month: number;
+        total: number;
+    };
+    statsMonth: {
+        calls: number;
+        closed: number;
+        rejected: number;
+    };
+    statsTotal: {
+        calls: number;
+        closed: number;
+        rejected: number;
+    };
+};

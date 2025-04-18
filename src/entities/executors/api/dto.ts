@@ -1,5 +1,5 @@
 import {ServerAns} from '../../../shared/types/share';
-import {Executor, ExecutorServiceType} from '../model/types';
+import {ExecutorServiceType, ExecutorStats} from '../model/types';
 
 /**
  * DTO для получения всех исполнителей
@@ -14,6 +14,11 @@ export type GetAllDto = ServerAns<{
 }>;
 
 /**
+ * DTO для получения статистики
+ */
+export type GetStatsDto = ServerAns<ExecutorStats>;
+
+/**
  * DTO исполнителя
  */
 export type ExecutorDTO = {
@@ -22,6 +27,8 @@ export type ExecutorDTO = {
     name: string;
     role: 'EXECUTOR';
     profile: ProfileDTO;
+    ordersCount: number;
+    reviewsCount: number;
 };
 
 /**
@@ -37,7 +44,18 @@ export type ProfileDTO = {
     id: number;
     phone: string;
     priority: number;
-    profilePhoto: null | string;
+    profilePhoto: FileDTO | null;
+    licenseDoc: FileDTO | null;
+    registrationDoc: FileDTO | null;
     rating: number;
     workFormat: ExecutorServiceType;
 };
+
+/**
+ * Файл, который приходит с сервера
+ */
+export interface FileDTO {
+    id: number;
+    type?: string;
+    url: string;
+}

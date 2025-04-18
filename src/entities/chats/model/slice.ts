@@ -3,50 +3,9 @@ import {fetchChats} from './thunk';
 import {ChatSlice, Message} from './types';
 
 import {Sort} from '../../../shared/types/share';
-import {placeholderExecutor} from '../../executors/model/slice';
 
 const initialState: ChatSlice = {
-    chats: [
-        {
-            id: 1,
-            interlocutor: placeholderExecutor,
-            messages: [
-                {
-                    id: 1,
-                    chatId: 1,
-                    content: 'Привет холодный мир',
-                    senderId: 1,
-                    createdAt: '10:10',
-                    readed: true,
-                },
-                {
-                    id: 2,
-                    chatId: 1,
-                    content:
-                        'Добрый день, хочу уточнить детали: как будет проводиться сборка',
-                    senderId: 1,
-                    createdAt: '10:10',
-                    readed: true,
-                },
-                {
-                    id: 3,
-                    chatId: 1,
-                    content: 'Добрый, да, конечно, сейчас расскажем',
-                    senderId: 2,
-                    createdAt: '10:10',
-                    readed: true,
-                },
-                {
-                    id: 4,
-                    chatId: 1,
-                    content: 'Спасибо!',
-                    senderId: 1,
-                    createdAt: '10:10',
-                    readed: false,
-                },
-            ],
-        },
-    ],
+    chats: [],
 
     pagination: {
         isLoading: false,

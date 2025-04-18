@@ -17,9 +17,9 @@ export const InfoIcon = (props: any) => (
                     id="Icon"
                     d="M21 28V21M21 14H21.0175M38.5 21C38.5 30.665 30.665 38.5 21 38.5C11.335 38.5 3.5 30.665 3.5 21C3.5 11.335 11.335 3.5 21 3.5C30.665 3.5 38.5 11.335 38.5 21Z"
                     stroke="#303030"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                 />
             </g>
         </svg>

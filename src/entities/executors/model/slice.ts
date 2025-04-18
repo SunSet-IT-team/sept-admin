@@ -5,32 +5,9 @@ import {
     fetchExecutors,
 } from './thunk';
 import {ExecutorsSlice} from './types';
-import {Executor, ExecutorServiceType} from '../../executors/model/types';
-
-export const placeholderExecutor: Executor = {
-    id: '1',
-    priority: 100,
-    name: 'ООО септики',
-    email: 'test@mail.ru',
-    phone: '89009009999',
-    profileImage: '',
-    about: 'Самая лучшая компания',
-    experience: '20 лет',
-    typeService: ExecutorServiceType.LEGAL_ENTITY,
-    city: 'Воронеж',
-    orderQty: 20,
-    docs: {
-        register: '',
-        approve: '',
-    },
-    rating: {
-        value: 4.8,
-        count: 100,
-    },
-};
 
 const initialState: ExecutorsSlice = {
-    executors: [placeholderExecutor, placeholderExecutor, placeholderExecutor],
+    executors: [],
     isLoading: false,
 };
 

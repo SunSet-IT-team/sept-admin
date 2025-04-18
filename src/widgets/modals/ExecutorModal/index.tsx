@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Box,
     Button,
@@ -17,11 +17,12 @@ import {
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
-import {Executor} from '../../../entities/executors/model/types';
+import {Executor, ExecutorStats} from '../../../entities/executors/model/types';
 import ExecutorModalStats from './components/ExecutorModalStats';
 import ExecutorModalDocs from './components/ExecutorModalDocs';
 import {useAppDispatch} from '../../../app/store/hook';
 import {deleteExecutorAndRefresh} from '../../../entities/executors/model/thunk';
+import {ExecutorApi} from '../../../entities/executors/api';
 
 type ExecutorModalProps = {
     open: boolean;
@@ -37,7 +38,24 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
     onClose,
     executor,
 }) => {
+    const [stats, setStats] = useState<ExecutorStats | null>(null);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const f = async () => {
+            try {
+                const {data} = await ExecutorApi.getStats(executor?.id || 0);
+
+                if (data.success) setStats(data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        f();
+    }, [executor?.id]);
+
+    console.log(executor);
 
     if (!executor) return;
 
@@ -93,7 +111,7 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
                 <Grid container spacing={4}>
                     <ExecutorModalDocs docs={executor.docs} />
 
-                    <ExecutorModalStats />
+                    <ExecutorModalStats stats={stats} />
                 </Grid>
             </DialogContent>
 

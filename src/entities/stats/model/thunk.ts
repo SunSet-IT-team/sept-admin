@@ -1,7 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {ExecuterStats, OrderStats} from './types';
-import {placeholderExecutor} from '../../executors/model/slice';
 
 export type FetchedStats = {
     orderStats: OrderStats;
@@ -47,7 +46,7 @@ export const fetchStats = createAsyncThunk<
             executerStats: {
                 totalExecuters: 600,
                 newExecuters: 23,
-                topExecuters: [placeholderExecutor],
+                topExecuters: [],
             },
         };
     } catch (error: any) {

@@ -6,9 +6,11 @@ import {ExecutorsApiChangePriorityParams, ExecutorsApiMethods} from './types';
  * API для взаимодействия с исполнителями
  */
 export const ExecutorApi: ExecutorsApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/executor&limit=1000`),
+    getAll: () => api.get<GetAllDto>(`/executor?limit=1000`),
 
-    delete: (id: number) => api.delete(`/executor/${id}`),
+    delete: (id: number | string) => api.delete(`/executor/${id}`),
+
+    getStats: (id: number | string) => api.get(`/executor/${id}/stats`),
 
     changePriority: (id: number, data: ExecutorsApiChangePriorityParams) =>
         api.patch(`/executor/${id}`, data),

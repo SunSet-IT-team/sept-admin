@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {Order} from './types';
+import {OrderApi} from '../api';
 
 export type FetchedOrders = {
     orders: Order[];
@@ -34,7 +35,10 @@ export const fetchOrders = createAsyncThunk<
         // Добавляем сортировку
         if (state.sort) params.sort = state.sort;
 
-        // const response = await OrderApi.getAll();
+        const log = await OrderApi.getAll();
+
+        console.log(log);
+
         // const services: Service[] = response.data.map((el) => ({
         //     name: el.name,
         //     id: el.id,

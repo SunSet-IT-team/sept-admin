@@ -1,5 +1,5 @@
 import {AxiosPromise} from 'axios';
-import {GetAllDto} from './dto';
+import {GetAllDto, GetStatsDto} from './dto';
 
 /**
  * Интерфейс для API исполнителей
@@ -13,7 +13,12 @@ export interface ExecutorsApiMethods {
     /**
      * Удалить исполнителя
      */
-    delete: (id: number) => AxiosPromise;
+    delete: (id: number | string) => AxiosPromise;
+
+    /**
+     * Получить статистику
+     */
+    getStats: (id: number | string) => AxiosPromise<GetStatsDto>;
 
     /**
      * Изменить приоритет исполнителя
