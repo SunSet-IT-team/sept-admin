@@ -20,6 +20,8 @@ export type CustomerDTO = {
     name: string;
     id: number;
     profile: ProfileDTO;
+    ordersCount: number;
+
     role: 'CUSTOMER';
 };
 
@@ -28,7 +30,6 @@ export type CustomerDTO = {
  */
 export type ProfileDTO = {
     addresses: AddressDTO[];
-    ordersCount: number;
     phone: string;
     priority: number;
     profilePhoto: string | null;

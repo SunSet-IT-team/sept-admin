@@ -13,7 +13,7 @@ export const mapServerCustomer = (customer: CustomerDTO): Customer => {
         phone: customer.profile.phone,
         profileImage: customer.profile.profilePhoto || '',
         addresses: customer.profile.addresses.map((el) => mapServerAddress(el)),
-        orderQty: customer.profile.ordersCount,
+        orderQty: customer.ordersCount,
         priority: customer.profile.priority,
     };
 };
