@@ -3,6 +3,7 @@ import {AppThunkParams} from '../../../shared/types/share';
 import {Executor} from './types';
 import {ExecutorApi} from '../api';
 import {mapExecutorDTO} from '../api/mapping';
+import {toast} from 'react-toastify';
 
 export type FetchedExecutors = {
     executors: Executor[];
@@ -72,15 +73,13 @@ export const changeExecutorAndRefresh = createAsyncThunk<
     'executors/changeExecutorAndRefresh',
     async (data, {dispatch, rejectWithValue}) => {
         try {
-            // Заглушка
-            await new Promise((resolve) => {
-                setTimeout(() => resolve([]), 2000);
+            await ExecutorApi.changePriority(data.id, {
+                priority: Number(data.priority),
             });
-
-            // await ServiceApi.changePriority(data.id, data);
 
             dispatch(fetchExecutors());
         } catch (error: any) {
+            toast.error(error.response?.data?.message || 'Ошибка');
             return rejectWithValue(error.response?.data?.message || 'Ошибка');
         }
     }

@@ -40,6 +40,9 @@ const executorsSlice = createSlice({
         builder.addCase(changeExecutorAndRefresh.pending, (state) => {
             state.isLoading = true;
         });
+        builder.addCase(changeExecutorAndRefresh.rejected, (state) => {
+            state.isLoading = false;
+        });
     },
 });
 

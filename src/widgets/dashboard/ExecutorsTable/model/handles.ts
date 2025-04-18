@@ -32,7 +32,10 @@ export const useExecutorTableHandles = () => {
         if (changedType !== 'priority') return newRow;
 
         dispatch(
-            changeExecutorAndRefresh({id: newRow.id, priority: newRow.priority})
+            changeExecutorAndRefresh({
+                id: Number(newRow.id),
+                priority: Number(newRow.priority),
+            })
         );
 
         return newRow; // обязательно вернуть новую строку

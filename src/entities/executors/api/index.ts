@@ -13,5 +13,5 @@ export const ExecutorApi: ExecutorsApiMethods = {
     getStats: (id: number | string) => api.get(`/executor/${id}/stats`),
 
     changePriority: (id: number, data: ExecutorsApiChangePriorityParams) =>
-        api.patch(`/executor/${id}`, data),
+        api.put(`/admin/users/${id}/priority`, data),
 };

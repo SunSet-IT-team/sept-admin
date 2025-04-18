@@ -32,10 +32,17 @@ export const getExecutorsTableColumns = (
             headerName: 'Телефон',
             flex: 1,
         },
+
         {
             field: 'orderQty',
             headerName: 'Сдано заявок',
             flex: 1,
+        },
+        {
+            field: 'priority',
+            headerName: 'Приоритет',
+            width: 150,
+            editable: true,
         },
 
         {
