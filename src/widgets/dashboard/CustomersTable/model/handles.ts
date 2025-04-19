@@ -17,7 +17,7 @@ export const useCustomerTableHandles = () => {
      * Обработчик клика для удаления
      */
     const handleClickDelete = useCallback((data: Customer) => {
-        dispatch(deleteCustomerAndRefresh(data.id));
+        dispatch(deleteCustomerAndRefresh(Number(data.id)));
     }, []);
 
     /**
@@ -32,7 +32,10 @@ export const useCustomerTableHandles = () => {
         if (changedType !== 'priority') return newRow;
 
         dispatch(
-            changeCustomerAndRefresh({id: newRow.id, priority: newRow.priority})
+            changeCustomerAndRefresh({
+                id: Number(newRow.id),
+                priority: newRow.priority,
+            })
         );
 
         return newRow; // обязательно вернуть новую строку

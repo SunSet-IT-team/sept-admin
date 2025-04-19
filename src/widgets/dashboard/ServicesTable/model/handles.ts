@@ -23,7 +23,7 @@ export const useServiceTableHandles = () => {
      * Обработчик клика для удаления
      */
     const handleClickDelete = useCallback((data: Service) => {
-        dispatch(deleteServiceAndRefresh(data.id));
+        dispatch(deleteServiceAndRefresh(Number(data.id)));
     }, []);
 
     /**
@@ -66,7 +66,10 @@ export const useServiceTableHandles = () => {
             : Number(newRow.priority);
 
         dispatch(
-            changeServiceAndRefresh({id: newRow.id, priority: newPriority})
+            changeServiceAndRefresh({
+                id: Number(newRow.id),
+                priority: newPriority,
+            })
         );
 
         return newRow; // обязательно вернуть новую строку

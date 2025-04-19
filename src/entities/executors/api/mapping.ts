@@ -12,8 +12,8 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
         phone: dto.profile.phone || '',
         name: dto.profile.companyName,
         priority: dto.profile.priority,
-        profileImage: dto.profile.profilePhoto
-            ? getImagePath(dto.profile.profilePhoto.url)
+        profileImage: dto.profile.profilePhotos
+            ? getImagePath(dto.profile.profilePhotos[0].url)
             : '',
 
         about: dto.profile.about,
@@ -22,11 +22,11 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
         city: dto.profile.city || 'Москва',
         orderQty: dto.profile.completedOrders,
         docs: {
-            register: dto.profile.registrationDoc
-                ? getImagePath(dto.profile.registrationDoc.url)
+            register: dto.profile.registrationDocs
+                ? getImagePath(dto.profile.registrationDocs[0].url)
                 : '',
-            approve: dto.profile.licenseDoc
-                ? getImagePath(dto.profile.licenseDoc.url)
+            approve: dto.profile.licenseDocs
+                ? getImagePath(dto.profile.licenseDocs[0].url)
                 : '',
         },
         rating: {

@@ -1,6 +1,9 @@
 # Этап сборки
 FROM node:20-alpine as build
 
+# Устанавливаем git и другие необходимые зависимости
+RUN apk add --no-cache git
+
 WORKDIR /app
 COPY package.json yarn.lock ./
 

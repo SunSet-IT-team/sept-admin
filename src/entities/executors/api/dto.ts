@@ -44,9 +44,9 @@ export type ProfileDTO = {
     id: number;
     phone: string;
     priority: number;
-    profilePhoto: FileDTO | null;
-    licenseDoc: FileDTO | null;
-    registrationDoc: FileDTO | null;
+    profilePhotos: FileDTO[] | null;
+    licenseDocs: FileDTO[] | null;
+    registrationDocs: FileDTO[] | null;
     rating: number;
     workFormat: ExecutorServiceType;
 };

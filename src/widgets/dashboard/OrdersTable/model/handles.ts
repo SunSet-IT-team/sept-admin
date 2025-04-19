@@ -23,7 +23,7 @@ export const useOrdersTableHandles = () => {
      * Обработчик клика для удаления
      */
     const handleClickDelete = useCallback((data: Order) => {
-        dispatch(deleteOrderAndRefresh(data.id));
+        dispatch(deleteOrderAndRefresh(Number(data.id)));
     }, []);
 
     /**
@@ -62,7 +62,10 @@ export const useOrdersTableHandles = () => {
         if (changedType !== 'priority') return newRow;
 
         dispatch(
-            changeOrderAndRefresh({id: newRow.id, priority: newRow.priority})
+            changeOrderAndRefresh({
+                id: Number(newRow.id),
+                priority: newRow.priority,
+            })
         );
 
         return newRow; // обязательно вернуть новую строку
