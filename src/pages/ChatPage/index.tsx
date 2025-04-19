@@ -1,7 +1,9 @@
-import {Navigate, useParams} from 'react-router-dom';
+import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../app/store/hook';
 import {getChat} from '../../entities/chats/model/selectors';
-import {ChatForm} from '../../widgets/ChatForm/ui';
+import {ChatForm} from 'sunset-chat';
+import {Box} from '@mui/material';
+import {getCurrentUser} from '../../entities/user/model/selectors';
 
 /**
  * Страница чата
@@ -9,10 +11,20 @@ import {ChatForm} from '../../widgets/ChatForm/ui';
 const ChatPage = () => {
     const {chatId} = useParams();
     const chat = useAppSelector(getChat(chatId ? Number(chatId) : -1));
+    const user = useAppSelector(getCurrentUser);
 
-    if (!chatId || !chat) return <Navigate to="/" />;
+    const navigate = useNavigate();
 
-    return <ChatForm {...chat} />;
+    if (!chatId || !chat || !user) return <Navigate to="/" />;
+
+    return (
+        <Box height="100dvh">
+            <ChatForm
+                chat={{...chat, currentUserId: user.id}}
+                handleCloseChat={() => navigate('/chat')}
+            />
+        </Box>
+    );
 };
 
 export default ChatPage;

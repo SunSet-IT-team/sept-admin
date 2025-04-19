@@ -1,7 +1,7 @@
 import {GridColDef} from '@mui/x-data-grid';
 import {Visibility} from '@mui/icons-material';
 import {IconButton} from '@mui/material';
-import {Chat} from '../../../../entities/chats/model/types';
+import {Chat} from 'sunset-chat';
 
 type getChatsTableColumnsParams = {
     handleClickView: (data: Chat) => void;
@@ -20,7 +20,7 @@ export const getChatsTableColumns = (
             field: 'interlocutor',
             headerName: 'Пользователь',
             flex: 1,
-            valueGetter: (_, row) => row.interlocutor.name,
+            valueGetter: (_, row) => row.chatUser.name,
         },
         {
             field: 'actions',

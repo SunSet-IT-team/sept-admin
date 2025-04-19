@@ -28,7 +28,7 @@ export type ExecutorDTO = {
     role: 'EXECUTOR';
     profile: ProfileDTO;
     ordersCount: number;
-    reviewsCount: number;
+    reviewCount: number;
 };
 
 /**

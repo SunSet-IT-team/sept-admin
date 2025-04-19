@@ -1,7 +1,5 @@
-import {WithId} from '../../../shared/types/share';
+import {Chat} from 'sunset-chat';
 import {Pagination, Sort} from '../../../shared/types/share';
-import {Customer} from '../../customers/model/types';
-import {Executor} from '../../executors/model/types';
 
 /**
  * Слайс для хранения данных об услугах
@@ -11,15 +9,6 @@ export interface ChatSlice {
     pagination: Pagination;
     sort: Sort | null;
 }
-
-/**
- * Чат
- */
-export type Chat = WithId & {
-    messages: Message[];
-    interlocutor: Executor | Customer;
-    additionalInfo?: string;
-};
 
 /**
  * Сообщение

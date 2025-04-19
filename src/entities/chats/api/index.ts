@@ -6,5 +6,5 @@ import {ChatsApiMethods} from './types';
  * API для взаимодействия с услугами
  */
 export const ChatsApi: ChatsApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/chats`),
+    getAll: () => api.get<GetAllDto>(`/chat/support/admin`),
 };

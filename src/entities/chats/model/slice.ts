@@ -39,32 +39,6 @@ const chatSlice = createSlice({
             state.pagination.currentPage = 0;
             state.sort = action.payload.sort;
         },
-
-        /**
-         * Подтверждение отправки сообщения
-         */
-        sendedMessage(
-            state,
-            action: PayloadAction<{timeId: String; message: Message}>
-        ) {
-            const message = action.payload.message;
-            const timeId = action.payload.timeId;
-            const chat = state.chats.find((c) => c.id === message.chatId);
-            if (chat) {
-                chat.messages = chat.messages.filter((m) => m.id != timeId);
-                chat.messages.push(message);
-            }
-        },
-
-        /**
-         * Пришло сообщение
-         */
-        receivedMessage(state, action: PayloadAction<Message>) {
-            const message = action.payload;
-            const chat = state.chats.find((c) => c.id === message.chatId);
-
-            if (chat) chat.messages.push(message);
-        },
     },
     extraReducers: (builder) => {
         /**
@@ -75,15 +49,12 @@ const chatSlice = createSlice({
         });
         builder.addCase(fetchChats.fulfilled, (state, action) => {
             state.pagination.isLoading = false;
+            state.pagination.total = action.payload.total;
+            state.chats = action.payload.chats;
         });
     },
 });
 
-export const {
-    setChatsPagination,
-    setChatsSort,
-    sendedMessage,
-    receivedMessage,
-} = chatSlice.actions;
+export const {setChatsPagination, setChatsSort} = chatSlice.actions;
 
 export const chatsReducer = chatSlice.reducer;

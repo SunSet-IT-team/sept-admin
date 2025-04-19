@@ -31,7 +31,7 @@ export const mapExecutorDTO = (dto: ExecutorDTO): Executor => {
         },
         rating: {
             value: dto.profile.rating,
-            count: dto.reviewsCount,
+            count: dto.reviewCount,
         },
     };
 };

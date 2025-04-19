@@ -53,14 +53,14 @@ const ChatsTable = () => {
                 <DataGrid
                     rows={chats}
                     columns={columns}
-                    paginationMode="server"
-                    rowCount={pagination.total}
-                    sortModel={sort ? [sort] : undefined}
-                    onSortModelChange={handles.handleSortModelChange}
-                    paginationModel={paginationModel}
-                    onPaginationModelChange={
-                        handles.handlePaginationModelChange
-                    }
+                    // paginationMode="server"
+                    // rowCount={pagination.total}
+                    // sortModel={sort ? [sort] : undefined}
+                    // onSortModelChange={handles.handleSortModelChange}
+                    // paginationModel={paginationModel}
+                    // onPaginationModelChange={
+                    //     handles.handlePaginationModelChange
+                    // }
                     pageSizeOptions={[1, 5, 10, 25]}
                     loading={pagination.isLoading}
                     disableColumnFilter

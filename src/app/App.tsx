@@ -7,19 +7,23 @@ import {appTheme} from './theme';
 import {BrowserRouter} from 'react-router-dom';
 import Static from './static/Static';
 import {ToastContainer} from 'react-toastify';
+import {QueryClientProvider} from '@tanstack/react-query';
+import {queryClient} from './store/query';
 
 function App() {
     return (
         <StrictMode>
-            <ThemeProvider theme={appTheme}>
-                <BrowserRouter>
-                    <Provider store={store}>
-                        <ToastContainer />
-                        <Static />
-                        <AppRouter />
-                    </Provider>
-                </BrowserRouter>
-            </ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={appTheme}>
+                    <BrowserRouter>
+                        <Provider store={store}>
+                            <ToastContainer />
+                            <Static />
+                            <AppRouter />
+                        </Provider>
+                    </BrowserRouter>
+                </ThemeProvider>
+            </QueryClientProvider>
         </StrictMode>
     );
 }

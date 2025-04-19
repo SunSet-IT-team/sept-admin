@@ -10,7 +10,7 @@ import {
  * API для взаимодействия с услугами
  */
 export const ServiceApi: ServiceApiMethods = {
-    getAll: () => api.get<GetAllDto>(`/service`),
+    getAll: () => api.get<GetAllDto>(`/service?limit=1000`),
 
     create: (data: ServiceApiCreateParams) => api.post(`/service`, data),
 

@@ -17,7 +17,7 @@ const CitiesStats = () => {
             <Grid container spacing={2}>
                 {orderStats.cities.map((el, index) => (
                     <>
-                        <Grid size={{xs: 6, md: 3}}>
+                        <Grid size={{xs: 6, md: 3}} key={el.city}>
                             <Typography variant="body1">
                                 {el.city}: <strong>{el.value}</strong>
                             </Typography>

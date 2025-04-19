@@ -21,8 +21,6 @@ export const fetchStats = createAsyncThunk<
         const {data} = await StatsApi.getStats();
 
         const mapped = mapStatsDTO(data.data);
-        console.log('mapped');
-        console.log(mapped);
 
         return mapped;
     } catch (error: any) {

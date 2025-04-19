@@ -1,6 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
-import {Chat} from './types';
+import {ChatsApi} from '../api';
+import {mapChatDTO} from '../api/mapping';
+import {Chat} from 'sunset-chat';
 
 export type FetchedChats = {
     chats: Chat[];
@@ -34,19 +36,13 @@ export const fetchChats = createAsyncThunk<
         // Добавляем сортировку
         if (state.sort) params.sort = state.sort;
 
-        // const response = await ChatApi.getAll();
-        // const services: Service[] = response.data.map((el) => ({
-        //     name: el.name,
-        //     id: el.id,
-        //     priority: el.priority,
-        // }));
+        const {data} = await ChatsApi.getAll();
 
-        // Заглушка
-        const response: Chat[] = await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
+        res.chats = data.data.items.map((el) => mapChatDTO(el));
 
-        res.chats = response;
+        res.total = res.chats.length;
+
+        console.log(res);
 
         return res;
     } catch (error: any) {

@@ -1,6 +1,9 @@
 import {Paper, Typography, Divider, Grid} from '@mui/material';
 import {Order} from '../../../../entities/orders/model/types';
-import {formatDateToDMY} from '../../../../shared/utils/formatter';
+import {
+    formatDateToDMY,
+    mapOrderStatus,
+} from '../../../../shared/utils/formatter';
 
 type OrderModalDetailsProps = {
     order: Order;
@@ -10,8 +13,6 @@ type OrderModalDetailsProps = {
  * Детали заказа в модалке
  */
 const OrderModalDetails = ({order}: OrderModalDetailsProps) => {
-    if (!order.detailes) return <></>;
-
     return (
         <Paper elevation={0} sx={{p: 2, mb: 3}}>
             <Typography variant="subtitle1" gutterBottom fontWeight="bold">
@@ -22,35 +23,32 @@ const OrderModalDetails = ({order}: OrderModalDetailsProps) => {
             <Grid container spacing={1}>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Исполнитель:</strong> {order.executor.name}
+                        <strong>Исполнитель:</strong> {order.executor?.name}
                     </Typography>
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Дата открытия:</strong>{' '}
-                        {formatDateToDMY(order.detailes.openDate)}
+                        <strong>Дата открытия:</strong> {order.date}
                     </Typography>
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Статус:</strong> {order.status}
+                        <strong>Статус:</strong> {mapOrderStatus(order.status)}
                     </Typography>
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Форма оплаты:</strong>{' '}
-                        {order.detailes.paymentMethod}
+                        <strong>Форма оплаты:</strong> {order.payment}
                     </Typography>
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Объем:</strong> {order.detailes.volume}
+                        <strong>Объем:</strong> {order.septicVolume}
                     </Typography>
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
-                        <strong>Вид сооружения:</strong>{' '}
-                        {order.detailes.structureType}
+                        <strong>Вид сооружения:</strong> {order.object}
                     </Typography>
                 </Grid>
             </Grid>
