@@ -29,5 +29,8 @@ export type OrderStats = {
 export type ExecuterStats = {
     totalExecuters: number;
     newExecuters: number;
-    topExecuters: Executor[];
+    topExecuters: {
+        name: string;
+        closedCount: number;
+    }[];
 };

@@ -1,5 +1,5 @@
 import {AxiosPromise} from 'axios';
-import {GetStatsDto} from './dto';
+import {GetStatsDTO} from './dto';
 
 /**
  * Интерфейс для API статистики
@@ -8,5 +8,5 @@ export interface StatsApiMethods {
     /**
      * Получить статистику
      */
-    getStats: () => AxiosPromise<GetStatsDto>;
+    getStats: () => AxiosPromise<GetStatsDTO>;
 }

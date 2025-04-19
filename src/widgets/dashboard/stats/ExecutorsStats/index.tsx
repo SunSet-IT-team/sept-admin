@@ -38,7 +38,7 @@ const ExecutorsStats = () => {
                         {executerStats.topExecuters.map((master, index) => (
                             <ListItem key={index}>
                                 <ListItemText
-                                    primary={`${master.name} (${master.orderQty})`}
+                                    primary={`${master.name} (${master.closedCount})`}
                                 />
                             </ListItem>
                         ))}

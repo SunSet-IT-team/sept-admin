@@ -1,6 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppThunkParams} from '../../../shared/types/share';
 import {ExecuterStats, OrderStats} from './types';
+import {StatsApi} from '../api';
+import {mapStatsDTO} from '../api/mapping';
 
 export type FetchedStats = {
     orderStats: OrderStats;
@@ -16,40 +18,16 @@ export const fetchStats = createAsyncThunk<
     AppThunkParams
 >('stats/fetchStats', async (_, {rejectWithValue}) => {
     try {
-        await new Promise((resolve) => {
-            setTimeout(() => resolve([]), 2000);
-        });
+        const {data} = await StatsApi.getStats();
 
-        return {
-            orderStats: {
-                // Все заявки
-                totalOrders: 360,
+        const mapped = mapStatsDTO(data.data);
+        console.log('mapped');
+        console.log(mapped);
 
-                // Закрытые (в статусе done)
-                totalOrdersClosed: 330,
-
-                // Открытие (В ожидании или работе)
-                totalOrdersOpen: 25,
-
-                // распределение по городам
-                cities: [
-                    {
-                        city: 'Москва',
-                        value: 100,
-                    },
-                    {
-                        city: 'Самара',
-                        value: 10,
-                    },
-                ],
-            },
-            executerStats: {
-                totalExecuters: 600,
-                newExecuters: 23,
-                topExecuters: [],
-            },
-        };
+        return mapped;
     } catch (error: any) {
+        console.log(error);
+
         return rejectWithValue(error.response?.data?.message || 'Ошибка');
     }
 });
