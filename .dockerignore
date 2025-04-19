@@ -2,8 +2,7 @@
 node_modules/
 dist/
 build/
-.env
-.env.local
+
 
 # Игнорируем системные файлы
 .DS_Store
