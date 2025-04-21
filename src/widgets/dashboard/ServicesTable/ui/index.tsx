@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
+import {ruRU} from '@mui/x-data-grid/locales';
 import {
     getServices,
     getServicesPagination,
@@ -46,6 +47,7 @@ const ServicesTable = () => {
             <DataGrid
                 rows={services}
                 columns={columns}
+                localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
                 // paginationMode="server"
                 // rowCount={pagination.total}
                 // sortModel={sort ? [sort] : undefined}

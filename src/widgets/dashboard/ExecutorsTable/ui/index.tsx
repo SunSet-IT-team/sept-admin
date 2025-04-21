@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
+import {ruRU} from '@mui/x-data-grid/locales';
 import {useState, useEffect} from 'react';
 import {useAppSelector, useAppDispatch} from '../../../../app/store/hook';
 import {useExecutorTableHandles} from '../model/handles';
@@ -48,6 +49,9 @@ const ExecutorsTable = () => {
                 <DataGrid
                     rows={executors}
                     columns={columns}
+                    localeText={
+                        ruRU.components.MuiDataGrid.defaultProps.localeText
+                    }
                     loading={executorsIsLoading}
                     processRowUpdate={handles.handleProcessRowUpdate}
                     disableColumnSelector

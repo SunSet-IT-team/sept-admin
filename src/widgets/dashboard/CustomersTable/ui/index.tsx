@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
+import {ruRU} from '@mui/x-data-grid/locales';
 import {useEffect} from 'react';
 import {useAppSelector, useAppDispatch} from '../../../../app/store/hook';
 import {useCustomerTableHandles} from '../model/handles';
@@ -40,6 +41,9 @@ const CustomersTable = () => {
                 <DataGrid
                     rows={customers}
                     columns={columns}
+                    localeText={
+                        ruRU.components.MuiDataGrid.defaultProps.localeText
+                    }
                     loading={customersIsLoading}
                     processRowUpdate={handles.handleProcessRowUpdate}
                     disableColumnSelector

@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
+import {ruRU} from '@mui/x-data-grid/locales';
 import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
 import {useChatsTableHandles} from '../model/handles';
 import {
@@ -53,6 +54,9 @@ const ChatsTable = () => {
                 <DataGrid
                     rows={chats}
                     columns={columns}
+                    localeText={
+                        ruRU.components.MuiDataGrid.defaultProps.localeText
+                    }
                     // paginationMode="server"
                     // rowCount={pagination.total}
                     // sortModel={sort ? [sort] : undefined}

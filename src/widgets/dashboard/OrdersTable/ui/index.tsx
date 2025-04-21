@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
+import {ruRU} from '@mui/x-data-grid/locales';
 import {useAppDispatch, useAppSelector} from '../../../../app/store/hook';
 import {useOrdersTableHandles} from '../model/handles';
 import {
@@ -58,6 +59,9 @@ const OrdersTable = () => {
                 <DataGrid
                     rows={orders}
                     columns={columns}
+                    localeText={
+                        ruRU.components.MuiDataGrid.defaultProps.localeText
+                    }
                     paginationMode="server"
                     rowCount={pagination.total}
                     sortModel={sort ? [sort] : undefined}
