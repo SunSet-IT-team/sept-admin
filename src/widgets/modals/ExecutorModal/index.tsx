@@ -72,6 +72,7 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
                 sx: {
                     borderRadius: 2,
                     minHeight: '60vh',
+                    background: '#d7e3f5',
                 },
             }}
         >

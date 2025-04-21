@@ -22,6 +22,7 @@ export const useStyles = (): StylesDictionary => {
             '& .MuiButton-icon svg': {
                 width: '28px',
                 height: '28px',
+                color: theme.palette.secondary.main,
             },
         },
 

@@ -147,6 +147,7 @@ export const OrdersFilter = () => {
 
             <Stack sx={styles.buttons}>
                 <Button
+                    sx={styles.button}
                     variant="outlined"
                     startIcon={<Clear />}
                     onClick={handleReset}
@@ -154,6 +155,7 @@ export const OrdersFilter = () => {
                     Сбросить
                 </Button>
                 <Button
+                    sx={styles.button}
                     variant="contained"
                     startIcon={<FilterAlt />}
                     onClick={handleApply}

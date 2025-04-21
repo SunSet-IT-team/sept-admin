@@ -11,12 +11,20 @@ export const AuthLayout = () => {
         <div className="app">
             <Container maxWidth="lg" sx={styles.container}>
                 <Box className="main" component="main" sx={styles.content}>
-                    <Box
-                        component="img"
-                        sx={styles.logo}
-                        alt="Your logo"
-                        src="/logo.png"
-                    />
+                    <Box sx={styles.logoContainer}>
+                        <Box
+                            component="img"
+                            sx={styles.logo}
+                            alt="ЭКОКОНТРОЛЬ logo"
+                            src="/logo.png"
+                        />
+                        <Box
+                            component="img"
+                            sx={styles.logoText}
+                            alt="ЭКОКОНТРОЛЬ"
+                            src="/logo_text.png"
+                        />
+                    </Box>
                     <Outlet />
                 </Box>
             </Container>

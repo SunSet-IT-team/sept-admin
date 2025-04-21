@@ -18,12 +18,29 @@ export const useStyles = (): StylesDictionary => {
             justifyContent: 'center',
             alignItems: 'center',
         },
+        logoContainer: {
+            width: '100%',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mx: 'auto',
+            mb: 3,
+            gap: 2,
+        },
         logo: {
-            objectFit: 'cover',
-            objectPosition: 'center',
-            width: 'auto',
-            height: {xs: 90, md: 120},
-            mb: 2,
+            aspectRatio: '5/6', // Замените на реальное соотношение вашего лого
+            width: '100%',
+            maxWidth: '150px',
+
+            objectFit: 'contain',
+        },
+        logoText: {
+            width: '100%',
+            height: '100%',
+            maxWidth: '300px',
+
+            objectFit: 'contain',
         },
     };
 };

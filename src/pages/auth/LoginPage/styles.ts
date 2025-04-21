@@ -9,7 +9,7 @@ export const useStyles = (): StylesDictionary => {
             mt: 4,
             opacity: 0.4,
             '& a': {
-                color: theme.palette.text.black,
+                color: theme.palette.secondary.main,
                 fontWeight: 500,
                 textDecoration: 'none',
             },

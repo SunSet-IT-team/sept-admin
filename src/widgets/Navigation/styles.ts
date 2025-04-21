@@ -1,7 +1,7 @@
 import {Theme} from '@mui/material/styles';
 
 export const navigationWrapperStyles = ({theme}: {theme: Theme}) => ({
-    backgroundColor: theme.palette.primary.main,
+    background: theme.palette.background.gradient,
 });
 
 export const tabsStyles = () => ({

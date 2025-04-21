@@ -46,6 +46,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     sx: {
                         borderRadius: 2,
                         minHeight: '60vh',
+                        background: '#d7e3f5',
                     },
                 },
             }}

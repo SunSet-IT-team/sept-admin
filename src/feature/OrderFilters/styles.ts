@@ -25,6 +25,10 @@ export const useStyles = (): StylesDictionary => {
             justifyContent: 'flex-end',
             gap: 2,
         },
+
+        button: {
+            width: '150px',
+        },
         formControl: {
             minWidth: 200,
             borderRadius: '8px',
