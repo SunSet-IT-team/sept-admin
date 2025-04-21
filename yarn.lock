@@ -2164,9 +2164,9 @@ stylis@4.2.0:
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.2.0.tgz#79daee0208964c8fe695a42fcffcac633a211a51"
   integrity sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==
 
-"sunset-chat@git+https://github.com/SunSet-IT-team/sunset-chat":
+"sunset-chat@git+https://github.com/SunSet-IT-team/sunset-chat.git":
   version "1.0.0"
-  resolved "git+https://github.com/SunSet-IT-team/sunset-chat#03fc232bca6c12ed3436466fb35d30ee903efdb3"
+  resolved "git+https://github.com/SunSet-IT-team/sunset-chat.git#2a9dd675be100d1496237773c9866d049bc926cd"
   dependencies:
     react-intersection-observer "^9.16.0"
     socket.io-client "^4.8.1"

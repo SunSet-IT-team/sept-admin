@@ -20,8 +20,8 @@ export const mapChatDTO = (chat: ChatDTO): Chat => {
                 user?.user.name ||
                 user?.user.profile.companyName ||
                 'Пользователь',
-            imagePath: user?.user.profile.profilePhoto
-                ? getImagePath(user.user.profile.profilePhoto.url)
+            imagePath: user?.user.profile?.profilePhotos[0]
+                ? getImagePath(user.user.profile.profilePhotos[0].url)
                 : '',
         },
     };

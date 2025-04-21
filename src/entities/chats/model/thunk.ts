@@ -42,8 +42,6 @@ export const fetchChats = createAsyncThunk<
 
         res.total = res.chats.length;
 
-        console.log(res);
-
         return res;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || 'Ошибка');

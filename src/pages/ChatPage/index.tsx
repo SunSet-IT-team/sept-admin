@@ -1,9 +1,9 @@
 import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../app/store/hook';
 import {getChat} from '../../entities/chats/model/selectors';
-import {ChatForm} from 'sunset-chat';
 import {Box} from '@mui/material';
 import {getCurrentUser} from '../../entities/user/model/selectors';
+import {ChatForm} from 'sunset-chat';
 
 /**
  * Страница чата

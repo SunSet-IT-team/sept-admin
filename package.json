@@ -28,7 +28,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.1",
     "react-toastify": "^11.0.5",
-    "sunset-chat": "git+https://github.com/SunSet-IT-team/sunset-chat"
+    "sunset-chat": "git+https://github.com/SunSet-IT-team/sunset-chat.git"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

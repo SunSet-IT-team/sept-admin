@@ -25,7 +25,7 @@ export type ChatDTO = {
             name: string;
             profile: {
                 companyName: string;
-                profilePhoto?: FileDTO;
+                profilePhotos: FileDTO[];
             };
             role: 'CUSTOMER' | 'EXECUTOR' | 'ADMIN';
         };
