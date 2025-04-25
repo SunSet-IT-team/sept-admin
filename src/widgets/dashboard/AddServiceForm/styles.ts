@@ -18,5 +18,13 @@ export const useStyles = (): StylesDictionary => {
             height: '40px',
             whiteSpace: 'nowrap',
         },
+        attachButton: {
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            padding: '8px',
+            '&:hover': {
+                backgroundColor: '#f5f5f5',
+            },
+        },
     };
 };

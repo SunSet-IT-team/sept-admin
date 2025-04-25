@@ -12,7 +12,10 @@ import {
 export const ServiceApi: ServiceApiMethods = {
     getAll: () => api.get<GetAllDto>(`/service?limit=1000`),
 
-    create: (data: ServiceApiCreateParams) => api.post(`/service`, data),
+    create: (data: ServiceApiCreateParams) =>
+        api.post(`/service`, data, {
+            headers: {'Content-Type': 'multipart/form-data'},
+        }),
 
     delete: (id: number) => api.delete(`/service/${id}`),
 

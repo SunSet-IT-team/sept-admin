@@ -31,6 +31,7 @@ export interface ServiceApiMethods {
 
 export type ServiceApiCreateParams = {
     name: string;
+    servicePreview?: File;
 };
 
 export type ServiceApiChangePriorityParams = {

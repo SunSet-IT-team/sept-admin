@@ -56,6 +56,7 @@ export const fetchServices = createAsyncThunk<
 
 type AddServiceAndRefresh = {
     name: string;
+    servicePreview: File;
 };
 
 /**
