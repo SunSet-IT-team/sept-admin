@@ -11,7 +11,12 @@ type ExecutorModalDocsProps = {
 const ExecutorModalDocs = ({docs}: ExecutorModalDocsProps) => {
     return (
         <Grid size={{xs: 12, md: 6}}>
-            <Typography variant="subtitle1" gutterBottom fontWeight="bold">
+            <Typography
+                variant="subtitle1"
+                gutterBottom
+                fontWeight="bold"
+                sx={{fontSize: '20px', lineHeight: '21px'}}
+            >
                 Фото документов
             </Typography>
             <Grid container spacing={2}>

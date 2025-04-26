@@ -1,21 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {
     Box,
-    Button,
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogActions,
-    Divider,
     Grid,
     IconButton,
     Typography,
-    Avatar,
-    Chip,
-    Paper,
 } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import {Executor, ExecutorStats} from '../../../entities/executors/model/types';
 import ExecutorModalStats from './components/ExecutorModalStats';
@@ -76,13 +69,17 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
                 },
             }}
         >
-            <DialogTitle>
+            <DialogTitle sx={{pt: '24px', pr: '36px', pl: '60px', pb: '20px'}}>
                 <Grid
                     container
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Typography variant="h5" fontWeight="bold">
+                    <Typography
+                        variant="h5"
+                        fontWeight="bold"
+                        sx={{fontSize: '20px', lineHeight: '21px'}}
+                    >
                         {executor.name}
                     </Typography>
                     <IconButton onClick={onClose}>
@@ -91,42 +88,46 @@ export const ExecutorModal: React.FC<ExecutorModalProps> = ({
                 </Grid>
             </DialogTitle>
 
-            <DialogContent dividers>
+            <DialogContent sx={{pt: '36px', pr: '36px', pl: '60px'}}>
                 <Box sx={{mb: 3}}>
-                    <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
-                        <StarIcon color="warning" />
-                        <Typography variant="body1" sx={{ml: 1, mr: 2}}>
+                    <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                        <StarIcon sx={{color: '#FFC700'}} />
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                fontSize: '14px',
+                                lineHeight: '21px',
+                                mr: 1,
+                                fontWeight: 500,
+                            }}
+                        >
                             {executor.rating.value.toFixed(1)}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            ({executor.rating.count} оценок)
+                        <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{fontSize: '14px', lineHeight: '21px'}}
+                        >
+                            {executor.rating.count} оценок
                         </Typography>
                     </Box>
-                    <Typography variant="body1">{executor.about}</Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{fontSize: '15px', lineHeight: '21px'}}
+                    >
+                        {executor.about}
+                    </Typography>
                 </Box>
-
-                <Divider sx={{my: 2}} />
 
                 <Grid container spacing={4}>
                     <ExecutorModalDocs docs={executor.docs} />
 
-                    <ExecutorModalStats stats={stats} />
+                    <ExecutorModalStats
+                        stats={stats}
+                        handleClickDelete={handleClickDelete}
+                    />
                 </Grid>
             </DialogContent>
-
-            <DialogActions sx={{p: 2, justifyContent: 'space-between'}}>
-                <Button
-                    variant="outlined"
-                    color="error"
-                    startIcon={<DeleteIcon />}
-                    onClick={handleClickDelete}
-                >
-                    Удалить
-                </Button>
-                <Button variant="contained" onClick={onClose}>
-                    Закрыть
-                </Button>
-            </DialogActions>
         </Dialog>
     );
 };
