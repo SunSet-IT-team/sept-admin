@@ -17,6 +17,7 @@ export type ChatDTO = {
     theme: string;
     orderId: string;
     id: number;
+    newMessages: number;
     participants: {
         chatId: number;
         id: number;

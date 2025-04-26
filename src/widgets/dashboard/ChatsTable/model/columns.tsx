@@ -1,5 +1,5 @@
 import {GridColDef} from '@mui/x-data-grid';
-import {Visibility} from '@mui/icons-material';
+import {ErrorOutline, Visibility} from '@mui/icons-material';
 import {IconButton} from '@mui/material';
 import {Chat} from 'sunset-chat';
 
@@ -33,10 +33,14 @@ export const getChatsTableColumns = (
             renderCell: (params) => (
                 <>
                     <IconButton
-                        color="primary"
+                        color={params.row.newMessages > 0 ? 'error' : 'primary'}
                         onClick={() => data.handleClickView(params.row)}
                     >
-                        <Visibility fontSize="small" />
+                        {params.row.newMessages > 0 ? (
+                            <ErrorOutline fontSize="small" />
+                        ) : (
+                            <Visibility fontSize="small" />
+                        )}
                     </IconButton>
                 </>
             ),

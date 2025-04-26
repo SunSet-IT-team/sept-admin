@@ -14,6 +14,7 @@ export const mapChatDTO = (chat: ChatDTO): Chat => {
         currentUserId: 0,
         additionalInfo: chat.theme,
         messages: [],
+        newMessages: chat.newMessages,
         chatUser: {
             id: user?.id || 0,
             name:
