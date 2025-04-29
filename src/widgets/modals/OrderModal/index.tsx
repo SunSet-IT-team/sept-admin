@@ -32,9 +32,6 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 }) => {
     if (!order) return <></>;
 
-    console.log('OrderModal');
-    console.log(order);
-
     return (
         <Dialog
             open={open}
@@ -77,15 +74,9 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                         </Grid>
                     )}
                 </Grid>
-                <OrderModalComment comment={order.detailes?.comment} />
+                <OrderModalComment comment={order.comment} />
                 <OrderModalReview review={order.review} />
             </DialogContent>
-
-            <DialogActions sx={{p: 2}}>
-                <Button onClick={onClose} variant="outlined">
-                    Закрыть
-                </Button>
-            </DialogActions>
         </Dialog>
     );
 };

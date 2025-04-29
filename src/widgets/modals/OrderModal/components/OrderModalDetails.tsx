@@ -28,6 +28,11 @@ const OrderModalDetails = ({order}: OrderModalDetailsProps) => {
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
+                        <strong>Услуга:</strong> {order.service?.name}
+                    </Typography>
+                </Grid>
+                <Grid size={{xs: 12}}>
+                    <Typography>
                         <strong>Дата открытия:</strong> {order.date}
                     </Typography>
                 </Grid>
@@ -48,9 +53,27 @@ const OrderModalDetails = ({order}: OrderModalDetailsProps) => {
                 </Grid>
                 <Grid size={{xs: 12}}>
                     <Typography>
+                        <strong>Глубина:</strong> {order.septicDepth}
+                    </Typography>
+                </Grid>
+                <Grid size={{xs: 12}}>
+                    <Typography>
+                        <strong>Расстояние:</strong> {order.septicDistance}
+                    </Typography>
+                </Grid>
+                <Grid size={{xs: 12}}>
+                    <Typography>
                         <strong>Вид сооружения:</strong> {order.object}
                     </Typography>
                 </Grid>
+                {order.report && (
+                    <Grid size={{xs: 12}}>
+                        <Typography>
+                            <strong>Сумма контракта:</strong>{' '}
+                            {order.report.total}₽
+                        </Typography>
+                    </Grid>
+                )}
             </Grid>
         </Paper>
     );
