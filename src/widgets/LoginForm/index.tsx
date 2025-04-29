@@ -22,20 +22,26 @@ const LoginForm = () => {
 
         setIsLoading(true);
 
-        const {data} = await userApi.auth({
-            email,
-            password,
-        });
+        try {
+            const {data} = await userApi.auth({
+                email,
+                password,
+            });
 
-        setIsLoading(false);
+            setIsLoading(false);
 
-        if (!data.success) {
-            toast.error('Неправильный логин или пароль');
-            return;
+            if (!data.success) {
+                toast.error('Неправильный логин или пароль');
+                return;
+            }
+
+            auth(data.data.token);
+            dispatch(fetchAdminData());
+        } catch (error: any) {
+            toast.error(error.response.data.message || 'Ошибка авторизации');
         }
 
-        auth(data.data.token);
-        dispatch(fetchAdminData());
+        setIsLoading(false);
     };
 
     const styles = useStyles();
